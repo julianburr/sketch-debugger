@@ -1,0 +1,13 @@
+{
+  "name": "sketch-debugger",
+  "version": "0.0.1",
+  "description": "Debugger plugin and utils for Sketch",
+  "homepage": "https://github.com/julianburr/sketch-debugger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julianburr/sketch-debugger"
+  },
+  "author": "Julian Burr <hello@julianburr.de>",
+  "license": "MIT",
+  "main": "./index",
+}
