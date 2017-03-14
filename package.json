@@ -9,5 +9,5 @@
   },
   "author": "Julian Burr <hello@julianburr.de>",
   "license": "MIT",
-  "main": "./index",
+  "main": "./index"
 }
