@@ -5,8 +5,7 @@ This tool was born out of the frustration of existing debugging tools for Sketch
 ## General Todos to Start With
 
  - [x] ~~Pull bootstraped plugin out of [`sketch-plugin-boilerplate`](https://github.com/julianburr/sketch-plugin-boilerplate)~~
- - [ ] Create build structure that also creates compiled and optimized util folder to be used as npm entry point
- - [ ] Add git hook to automatically bundle on every commit to ensure to have the latest `.sketchplugin` bundle available at all times
+ - [x] ~~Create build structure that also creates compiled and optimized util folder to be used as npm entry point~~ *TODO: simplify (build) scripts*
  - [ ] Create simple website with howtos and documentation of util functions
 
 
