@@ -1,0 +1,54 @@
+{
+  "name": "Sketch Plugin Boilerplate",
+  "identifier": "com.julianburr.sketch-boilerplate",
+  "description": "This is just a simple development boilerplate for sketch plugins!",
+  "authorEmail": "julian.burr@rexsoftware.com",
+  "author": "Julian Burr",
+  "disableCocoaScriptPreprocessor": true,
+  "commands": [
+    {
+      "script": "plugin.js",
+      "handler": "helloWorld",
+      "name": "Hello World",
+      "identifier": "helloWorld"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "openWindow",
+      "name": "Open Window",
+      "identifier": "openWindow"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "openPanel",
+      "name": "Open Panel",
+      "identifier": "openPanel"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "handleBridgeMessage",
+      "name": "Handle Bridge Message",
+      "identifier": "handleBridgeMessage"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "sendBridgeMessage",
+      "name": "Send Bridge Message",
+      "identifier": "sendBridgeMessage"
+    }
+  ],
+  "menu": {
+    "isRoot": 1,
+    "items": [
+      {
+        "title": "Sketch Plugin Boilerplate",
+        "items": [
+          "helloWorld", 
+          "openWindow",
+          "openPanel", 
+          "sendBridgeMessage"
+        ]
+      }
+    ]
+  }
+}

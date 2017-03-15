@@ -1,0 +1,38 @@
+.filters {
+  flex: 0 1;
+  display: flex;
+
+  .filters-inner {
+    background: $colors-white;
+    box-shadow: $shadows-box-light;
+    flex: 1;
+
+    .filter {
+      position: relative;
+
+      .filter-button {
+        width: 4rem;
+        height: 4rem;
+        display: inline-block;
+        position: relative;
+        border: 0 none;
+        background: none transparent;
+        color: $colors-grey;
+        transition: color .2s;
+
+        &:hover {
+          background: lighten($colors-grey-light, 1%);
+          color: $colors-primary;
+        }
+
+        &.active {
+          color: $colors-primary;
+        }
+
+        .icon {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
