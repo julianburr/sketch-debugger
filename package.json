@@ -9,7 +9,7 @@
   },
   "author": "Julian Burr <hello@julianburr.de>",
   "license": "MIT",
-  "main": "./index",
+  "main": "./lib/index",
   "devDependencies": {
     "autoprefixer": "^6.7.0",
     "babel-core": "^6.21.0",
@@ -68,7 +68,8 @@
     "start": "yarn start:plugin && yarn start:webview",
     "build:plugin": "node scripts/plugin/build.js",
     "build:webview": "node scripts/webview/build.js",
-    "build": "yarn build:plugin && yarn build:webview",
+    "build:lib": "node scripts/lib/build.js",
+    "build": "yarn build:plugin && yarn build:lib && yarn build:webview",
     "bundle": "yarn build && node scripts/plugin/bundle.js",
     "lint:plugin": "eslint ./src/plugin/ -c ./config/plugin/eslint.js || true",
     "lint:webview": "eslint ./src/webview/ -c ./config/webview/eslint.js || true",
