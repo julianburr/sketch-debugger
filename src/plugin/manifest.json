@@ -8,9 +8,15 @@
   "commands": [
     {
       "script": "plugin.js",
-      "handler": "togglePanel",
-      "name": "Open Debugger",
-      "identifier": "togglePanel"
+      "handler": "openWindow",
+      "name": "Open",
+      "identifier": "openWindow"
+    },
+    {
+      "script": "plugin.js",
+      "handler": "test",
+      "name": "Test",
+      "identifier": "test"
     },
     {
       "script": "plugin.js",
@@ -22,7 +28,13 @@
   "menu": {
     "isRoot": 1,
     "items": [
-      "togglePanel"
+      {
+        "title": "Debugger",
+        "items": [
+          "openWindow",
+          "test"
+        ]
+      }
     ]
   }
 }

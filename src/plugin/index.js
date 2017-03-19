@@ -15,7 +15,7 @@ const handleBridgeMessage = function (context) {
   try {
     data = JSON.parse(data);
   } catch (err) {
-    Debug.error(err)
+    Debug.error(err);
     return;
   }
   WebViewUtil.receiveAction(data.name, data.payload);
@@ -29,4 +29,4 @@ const test = function (context) {
   const foo = {bar: {x: [{y: {a: {b: 'c'}}}, 'a', 'b', 'c', 1, 2, 3]}};
   Debug.warn('foo', foo);
   Debug.error('This is aweful');
-}
+};

@@ -3,7 +3,7 @@ import WebViewUtil from 'utils/web-view';
 
 export default {
   open (width, height) {
-    WebViewUtil.Window.open(WebViewCore.identifierWindow, width, height);
+    WebViewUtil.Window.open(WebViewUtil.identifierWindow, width, height);
   },
 
   sendLogs (values, type) {
@@ -21,15 +21,15 @@ export default {
           type,
           isClass,
           value: isClass ? this.getClassValue(arg) : arg
-        }
+        };
       }),
       trace: this.getTrace()
-    }
-    WebViewUtil.sendAction('addLogs', logs)
+    };
+    WebViewUtil.Window.sendAction(WebViewUtil.identifierWindow, 'addLog', logs);
   },
 
   clearLogs () {
-    WebViewUtil.sendAction('clearLogs');
+    WebViewUtil.Window.sendAction(WebViewUtil.identifierWindow, 'clearLogs');
   },
 
   getClassValue (instance) {
@@ -45,4 +45,4 @@ export default {
     stack = stack.map(s => s.replace(/\s\g/, ''));
     return { stack, line, column };
   }
-}
+};

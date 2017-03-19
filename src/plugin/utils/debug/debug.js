@@ -12,7 +12,7 @@ export default {
 
   log (...args) {
     args.forEach(arg => {
-      log(arg); 
+      log(arg);
     });
     DebugWindow.sendLogs(args);
   },
@@ -20,8 +20,7 @@ export default {
   warn (...args) {
     log('### WARN');
     args.forEach(arg => {
-      
-      log(arg); 
+      log(arg);
     });
     log('### WARN END');
     DebugWindow.sendLogs(args, this.TYPES.WARNING);
@@ -30,7 +29,7 @@ export default {
   error (...args) {
     log('### ERROR');
     args.forEach(arg => {
-      log(arg); 
+      log(arg);
     });
     log('### ERROR END');
     DebugWindow.sendLogs(args, this.TYPES.ERROR);
@@ -61,7 +60,7 @@ export default {
   },
 
   trace (withError) {
-    
-  },
-}
+
+  }
+};
 
