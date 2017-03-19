@@ -1,7 +1,7 @@
 import DebugCore from './debug';
-import DebugPanel from './panel';
+import DebugWindow from './window';
 
 export default {
   ...DebugCore,
-  Panel: DebugPanel
+  Window: DebugWindow
 }

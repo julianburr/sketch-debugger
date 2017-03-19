@@ -1,34 +1,39 @@
 import moment from 'moment';
-import DebugPanel from './panel';
+import DebugWindow from './window';
 
 export default {
   TYPES: {
-    DEFAULT: 'log-default',
-    WARNING: 'log-warning',
-    ERROR: 'log-error',
-    COUNTER: 'log-counter',
-    TIMER: 'log-timer'
+    DEFAULT: 'default',
+    WARNING: 'warning',
+    ERROR: 'error',
+    COUNTER: 'counter',
+    TIMER: 'timer'
   },
 
   log (...args) {
     args.forEach(arg => {
       log(arg); 
     });
-    DebugPanel.sendLogs(args);
+    DebugWindow.sendLogs(args);
   },
 
   warn (...args) {
+    log('### WARN');
     args.forEach(arg => {
+      
       log(arg); 
     });
-    DebugPanel.sendLogs(args, this.TYPES.WARNING);
+    log('### WARN END');
+    DebugWindow.sendLogs(args, this.TYPES.WARNING);
   },
 
   error (...args) {
+    log('### ERROR');
     args.forEach(arg => {
       log(arg); 
     });
-    DebuggerPanel.sendLogs(args, this.TYPES.ERROR);
+    log('### ERROR END');
+    DebugWindow.sendLogs(args, this.TYPES.ERROR);
   },
 
   count (log) {

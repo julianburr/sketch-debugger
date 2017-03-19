@@ -17,7 +17,7 @@ module.exports = {
   entry: resolveApp('src/plugin/index.js'),
   manifest: resolveApp('src/plugin/manifest.json'),
   build: resolveApp('Contents/Sketch'),
-  bundle: resolveApp('sketch-plugin-boilerplate.sketchplugin'),
+  bundle: resolveApp('sketch-debugger.sketchplugin'),
   frameworks: resolveApp('src/frameworks'),
   frameworksBuild: resolveApp('Contents/Resources/frameworks'),
   packageJson: resolveApp('package.json'),

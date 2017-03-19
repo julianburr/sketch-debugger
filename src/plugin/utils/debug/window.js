@@ -2,8 +2,8 @@ import moment from 'moment';
 import WebViewUtil from 'utils/web-view';
 
 export default {
-  open () {
-    WebViewUtil.openWindow();
+  open (width, height) {
+    WebViewUtil.Window.open(WebViewCore.identifierWindow, width, height);
   },
 
   sendLogs (values, type) {
