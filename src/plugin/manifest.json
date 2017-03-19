@@ -1,54 +1,28 @@
 {
-  "name": "Sketch Plugin Boilerplate",
-  "identifier": "com.julianburr.sketch-boilerplate",
-  "description": "This is just a simple development boilerplate for sketch plugins!",
+  "name": "Sketch Debugger",
+  "identifier": "com.julianburr.sketch-debugger",
+  "description": "Sketch Debugger",
   "authorEmail": "julian.burr@rexsoftware.com",
   "author": "Julian Burr",
   "disableCocoaScriptPreprocessor": true,
   "commands": [
     {
       "script": "plugin.js",
-      "handler": "helloWorld",
-      "name": "Hello World",
-      "identifier": "helloWorld"
-    },
-    {
-      "script": "plugin.js",
-      "handler": "openWindow",
-      "name": "Open Window",
-      "identifier": "openWindow"
-    },
-    {
-      "script": "plugin.js",
-      "handler": "openPanel",
-      "name": "Open Panel",
-      "identifier": "openPanel"
+      "handler": "togglePanel",
+      "name": "Open Debugger",
+      "identifier": "togglePanel"
     },
     {
       "script": "plugin.js",
       "handler": "handleBridgeMessage",
       "name": "Handle Bridge Message",
       "identifier": "handleBridgeMessage"
-    },
-    {
-      "script": "plugin.js",
-      "handler": "sendBridgeMessage",
-      "name": "Send Bridge Message",
-      "identifier": "sendBridgeMessage"
     }
   ],
   "menu": {
     "isRoot": 1,
     "items": [
-      {
-        "title": "Sketch Plugin Boilerplate",
-        "items": [
-          "helloWorld", 
-          "openWindow",
-          "openPanel", 
-          "sendBridgeMessage"
-        ]
-      }
+      "togglePanel"
     ]
   }
 }
