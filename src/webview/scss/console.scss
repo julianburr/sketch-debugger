@@ -189,7 +189,8 @@
         .values li.value {
 
           .log-key,
-          .log-string .log-value {
+          .log-string .log-value,
+          .log-number .log-value {
             color: $colors-white;
           }
 
@@ -263,6 +264,16 @@
 
           .log-string .log-value {
             color: darken($colors-red, 15%);
+          }
+
+          .log-number .log-value {
+            color: darken($colors-blue, 15%);
+          }
+
+          .log-empty .log-value {
+            opacity: .5;
+            color: inherit;
+            font-style: italic;
           }
 
           .log-object,

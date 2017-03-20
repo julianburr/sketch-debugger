@@ -2,8 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import LogValue from './value';
 
 export default class LogArray extends Component {
-  static propTypes = {};
-  static defaultProps = {};
+  static propTypes = {
+    prefix: PropTypes.string,
+    array: PropTypes.array.isRequired
+  };
+
+  static defaultProps = {
+    prefix: 'Array'
+  };
 
   constructor () {
     super();
@@ -19,7 +25,7 @@ export default class LogArray extends Component {
           onClick={() => this.setState({collapsed: !this.state.collapsed})}
           className='button-toggle'
         >&gt;</button>
-        <span className='log-value-type'>Array</span>
+        <span className='log-value-type'>{this.props.prefix}</span>
         {!this.state.collapsed ? (
           <ul>
             {this.props.array.map((value, key) => {

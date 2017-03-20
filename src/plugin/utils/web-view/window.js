@@ -8,7 +8,7 @@ export default {
       NSWindowStyleMaskClosable |
       NSResizableWindowMask;
     const window = NSPanel.alloc().initWithContentRect_styleMask_backing_defer(frame, masks, NSBackingStoreBuffered, false);
-    window.setMinSize({width: 200, height: 200});
+    window.setMinSize({width: 400, height: 300});
 
     // We use this dictionary to have a persistant storage of our NSWindow/NSPanel instance
     // Otherwise the instance is stored nowhere and gets release => Window closes

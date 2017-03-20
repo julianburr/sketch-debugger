@@ -29,4 +29,12 @@ const test = function (context) {
   const foo = {bar: {x: [{y: {a: {b: 'c'}}}, 'a', 'b', 'c', 1, 2, 3]}};
   Debug.warn('foo', foo);
   Debug.error('This is aweful');
+
+  let threadDictionary = NSThread.mainThread().threadDictionary();
+  threadDictionary['functionTest'] = (foo) => {
+    Debug.log('This function was strored in the thread dictionary! :)', foo);
+  };
+
+  const runMe = threadDictionary['functionTest'];
+  runMe('Hello World');
 };

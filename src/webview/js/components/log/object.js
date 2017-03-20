@@ -2,8 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import LogValue from './value';
 
 export default class LogObject extends Component {
-  static propTypes = {};
-  static defaultProps = {};
+  static propTypes = {
+    prefix: PropTypes.string,
+    logKey: PropTypes.string,
+    object: PropTypes.object.isRequired
+  };
+
+  static defaultProps = {
+    prefix: 'Object'
+  };
 
   constructor () {
     super();
@@ -25,7 +32,7 @@ export default class LogObject extends Component {
             <span className='log-colon'>: </span>
           </span>
         )}
-        <span className='log-value-type'>Object</span>
+        <span className='log-value-type'>{this.props.prefix}</span>
         {!this.state.collapsed ? (
           <ul>
             {Object.keys(this.props.object).map(key => {
