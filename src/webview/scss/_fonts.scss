@@ -1,7 +1,7 @@
-// @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 @import '../assets/fonts/icomoon/style.css';
 
-$fonts-default: Open Sans, Lato;
-$fonts-mono: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+$fonts-default: 'Open Sans', Lato, sans-serif;
+$fonts-mono: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
 $fonts-icons: icomoon;

@@ -109,7 +109,7 @@
           }
         }
 
-        &.type-warn {
+        &.type-warning {
 
           &.active:before,
           &.active:hover:before {
@@ -178,12 +178,12 @@
         background: none $colors-red;
       }
 
-      &.log-warn {
+      &.log-warning {
         background: none $colors-yellow;
       }
 
       &.log-error,
-      &.log-warn {
+      &.log-warning {
         color: $colors-white;
 
         .values li.value {

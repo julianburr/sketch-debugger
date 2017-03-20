@@ -1,4 +1,3 @@
-import moment from 'moment';
 import DebugWindow from './window';
 
 export default {
@@ -14,7 +13,7 @@ export default {
     args.forEach(arg => {
       log(arg);
     });
-    DebugWindow.sendLogs(args);
+    DebugWindow.sendLog(args, this.TYPES.DEFAULT);
   },
 
   warn (...args) {
@@ -23,7 +22,7 @@ export default {
       log(arg);
     });
     log('### WARN END');
-    DebugWindow.sendLogs(args, this.TYPES.WARNING);
+    DebugWindow.sendLog(args, this.TYPES.WARNING);
   },
 
   error (...args) {
@@ -32,7 +31,7 @@ export default {
       log(arg);
     });
     log('### ERROR END');
-    DebugWindow.sendLogs(args, this.TYPES.ERROR);
+    DebugWindow.sendLog(args, this.TYPES.ERROR);
   },
 
   count (log) {

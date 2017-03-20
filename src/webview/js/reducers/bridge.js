@@ -34,12 +34,7 @@ export default (state, action) => {
       switch (action.payload.name) {
         case 'addLog': 
           setTimeout(() => {
-            store.dispatch(addLog({
-              type: 'default',
-              values: [`omg`],
-              ts: moment(),
-              file: 'hello.world'
-            }));
+            store.dispatch(addLog(action.payload.payload));
           });
           break;
         default:

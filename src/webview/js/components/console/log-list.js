@@ -28,16 +28,6 @@ export default class LogList extends Component {
   static propTypes = {};
   static defaultProps = {};
 
-  static getValueType(value) {
-    if (_.isArray(value)) {
-      return 'Array';
-    }
-    if (_.isObject(value)) {
-      return 'Object';
-    }
-    return 'string';
-  }
-
   constructor () {
     super();
     this.state = {
@@ -91,7 +81,6 @@ export default class LogList extends Component {
                   )}
                   <ul className='values'>
                     {log.values.map((value, k) => {
-                      const type = LogList.getValueType(value);
                       return (
                         <li 
                           className={`value ${this.props.selectedLog === `${i}-${k}` ? 'selected' : ''}`} 

@@ -10,11 +10,12 @@ export default class Value extends Component {
 
   render () {
     const { value, logKey } = this.props;
-    if (_.isArray(value)) {
-      return <LogArray array={value} logKey={logKey} />
-    } else if (_.isObject(value)) {
-      return <LogObject object={value} logKey={logKey} />;
+    if (value.type === 'Array') {
+      return <LogArray array={value.value} logKey={logKey} />
     }
-    return <LogString string={String(value)} logKey={logKey} />;
+    if (value.type === 'Object') {
+      return <LogObject object={value.value} logKey={logKey} />;
+    }
+    return <LogString string={String(value.value)} logKey={logKey} />;
   }
 }

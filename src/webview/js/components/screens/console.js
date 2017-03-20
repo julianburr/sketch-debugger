@@ -69,7 +69,7 @@ export default class Console extends Component {
               </div>
             </div>
             <div className='filter log-types'>
-              {['default', 'warn', 'error'].map(type => {
+              {['default', 'warning', 'error'].map(type => {
                 return (
                   <button
                     key={type}
