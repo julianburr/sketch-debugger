@@ -13,7 +13,7 @@ var nodePaths = (process.env.NODE_PATH || '')
   .map(resolveApp);
 
 module.exports = {
-  src: resolveApp('src/lib/index.js'),
+  src: resolveApp('src/lib'),
   build: resolveApp('lib'),
   nodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths

@@ -1,9 +1,2 @@
-export default {
-  log(...args) {
-    args.forEach(arg => {
-      log(arg);
-    });
-  }
-}
-
-export const someThingElse = 'Hello World';
+import Debug from 'utils/debug';
+export default Debug;

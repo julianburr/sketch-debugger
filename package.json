@@ -10,6 +10,9 @@
   "author": "Julian Burr <hello@julianburr.de>",
   "license": "MIT",
   "main": "./lib/index",
+  "bugs": {
+    "url": "https://github.com/julianburr/sketch-debugger/issues"
+  },
   "devDependencies": {
     "autoprefixer": "^6.7.0",
     "babel-core": "^6.21.0",

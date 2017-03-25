@@ -16,6 +16,10 @@ fs.emptyDirSync(paths.build);
 console.log('Create new lib production build...');
 build();
 
+// Copy package.json
+console.log('Copy package json');
+fs.copySync(paths.src + '/package.json', paths.build + '/package.json');
+
 function build () {
   rollup.rollup(config).then(function (bundle) {
     // Write bundle to file
