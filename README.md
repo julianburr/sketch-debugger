@@ -11,7 +11,7 @@ This tool was born out of the frustration of existing debugging tools for Sketch
 
 In the Sketch plugin development environment, the global `log` function is provided to create system logs (alias for [`NSLog`](https://developer.apple.com/reference/foundation/1395275-nslog?language=objc) I guess?!). But this function is not very flexible. It can only take one argument and it cannot divide into different log levels. So I decided create some small util functions, that behave more like the [`console`](https://developer.mozilla.org/en/docs/Web/API/console) functions I am used to from usual JS development...
 
-The util functions also send the logs to a seperate plugin, that can be installed if you wish so (it is not required! You are very welcome to keep using the System Console if you prefer so :)). For more infos, see [the plugin section](#Plugin)
+The util functions also send the logs to a seperate plugin, that can be installed if you wish so (it is not required! You are very welcome to keep using the System Console if you prefer so :)). For more infos, see [the plugin section](#plugin)
 
 ### Get started
 
