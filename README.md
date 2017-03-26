@@ -110,6 +110,7 @@ With a similar util library it would be possible to log network requests and res
  - [ ] .group* methods
 
 ## Plugin
+ - [ ] Add stack trace now that I can get it with the preprocessor enabled + integrate [source map](https://github.com/mozilla/source-map) handling to show the original trace if plugin.js has a source map defined!
  - [ ] Finish console
  - [ ] Add element tree panel
  - [ ] Create HTTP request utils that also send data to debugger 
