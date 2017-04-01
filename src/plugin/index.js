@@ -24,17 +24,10 @@ const handleBridgeMessage = function (context) {
 // eslint-disable-next-line no-unused-vars
 const test = function (context) {
   Core.initWithContext(context);
-  Debug.log('Hello', 'World');
-  Debug.log('context', context);
-  const foo = {bar: {x: [{y: {a: {b: 'c'}}}, 'a', 'b', 'c', 1, 2, 3]}};
-  Debug.warn('foo', foo);
-  Debug.error('This is aweful');
-
-  let threadDictionary = NSThread.mainThread().threadDictionary();
-  threadDictionary['functionTest'] = (foo) => {
-    Debug.log('This function was strored in the thread dictionary! :)', foo);
-  };
-
-  const runMe = threadDictionary['functionTest'];
-  runMe('Hello World');
+  // Debug.log('Hello', 'World');
+  // Debug.log('context', context);
+  // const foo = {bar: {x: [{y: {a: {b: 'c'}}}, 'a', 'b', 'c', 1, 2, 3]}};
+  // Debug.warn('foo', foo);
+  // Debug.error('This is aweful'); 2;
+  Debug.Window.sendElementTree();
 };

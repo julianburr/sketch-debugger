@@ -5,6 +5,7 @@ import { history } from './store';
 
 import App from 'components/screens/app';
 import Console from 'components/screens/console';
+import Elements from 'components/screens/elements';
 import NotFound from 'components/screens/404';
 
 class Redirect extends Component {
@@ -24,6 +25,7 @@ export default class Routes extends Component {
         <Route path='/' component={App}>
           <IndexRoute component={() => <Redirect to='/console' />} />
           <Route path='console' component={Console} />
+          <Route path='elements' component={Elements} />
           <Route path='*' component={NotFound} />
         </Route>
       </Router>

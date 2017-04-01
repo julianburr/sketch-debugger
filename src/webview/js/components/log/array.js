@@ -25,6 +25,12 @@ export default class LogArray extends Component {
           onClick={() => this.setState({collapsed: !this.state.collapsed})}
           className='button-toggle'
         >&gt;</button>
+        {this.props.logKey && (
+          <span>
+            <span className='log-key'>{this.props.logKey}</span>
+            <span className='log-colon'>: </span>
+          </span>
+        )}
         <span className='log-value-type'>{this.props.prefix}</span>
         {!this.state.collapsed ? (
           <ul>

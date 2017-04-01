@@ -3,6 +3,7 @@ import { SEND_ACTION, RECEIVE_ACTION } from 'actions/bridge';
 import moment from 'moment';
 import store from 'webview/js/store';
 import { addLog } from 'actions/console';
+import { setTree } from 'actions/elements';
 
 export let defaultState = {
   actions: []
@@ -35,6 +36,11 @@ export default (state, action) => {
         case 'addLog': 
           setTimeout(() => {
             store.dispatch(addLog(action.payload.payload));
+          });
+          break;
+        case 'setElementTree': 
+          setTimeout(() => {
+            store.dispatch(setTree(action.payload.payload));
           });
           break;
         default:

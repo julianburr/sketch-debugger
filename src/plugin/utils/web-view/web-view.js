@@ -28,8 +28,8 @@ export default {
       return;
     }
     const script = `sketchBridge('${JSON.stringify({name, payload})}');`;
-    log('sendAction')
-    log(script)
+    log('sendAction');
+    log(script);
     const check = webView.evaluateJavaScript_completionHandler(script, null);
   },
 

@@ -1,4 +1,5 @@
 import DebugWindow from './window';
+import Formatter from 'utils/formatter';
 
 export default {
   TYPES: {
