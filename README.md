@@ -113,7 +113,7 @@ With a similar util library it would be possible to log network requests and res
  - [ ] Add stack trace now that I can get it with the preprocessor enabled + integrate [source map](https://github.com/mozilla/source-map) handling to show the original trace if plugin.js has a source map defined!
  - [ ] Finish console
  - [ ] Add element tree panel
- - [ ] Create HTTP request utils that also send data to debugger 
+ - [ ] ~~Create HTTP request utils that also send data to debugger~~ see [`sketch-fetch`](https://github.com/julianburr/sketch-fetch)
  - [ ] Add network panel
  - [ ] Add action listener (if possible without crashes :/) and add action panel
  - [ ] Integrate automated `MS*` documentation tool build on the [`class-dumps`](https://github.com/abynim/Sketch-Headers) if possible
