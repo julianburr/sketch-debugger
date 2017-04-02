@@ -9,7 +9,7 @@ var babelConfig = require('./babel');
 var plugins = [
   resolve({module: false}),
   babel(babelConfig),
-  commonjs()
+  // commonjs()
 ];
 
 if (process.env.NODE_ENV === 'production') {

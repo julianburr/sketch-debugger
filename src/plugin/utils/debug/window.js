@@ -12,14 +12,9 @@ export default {
     const addLog = {
       ts: new Date().getTime(),
       type,
-      values: values.map(arg => {
-        return DebugCore.prepareValue(arg);
-      }),
-      stack: DebugCore.getStack(),
-      file: DebugCore.getFileName()
+      values: values.map(v => DebugCore.prepareValue(v)),
+      stack: DebugCore.getStack()
     };
-    log('I`ll send these logs:');
-    log(addLog);
     WebViewUtil.Window.sendAction(WebViewUtil.identifierWindow, 'addLog', addLog);
   },
 
@@ -31,7 +26,7 @@ export default {
   getElementTree () {
     const windows = Formatter.toArray(NSApp.windows()).filter(win => {
       return win.isKindOfClass(MSDocumentWindow);
-    })
+    });
     return windows.map((win, index) => ({
       type: 'window',
       index,

@@ -1,6 +1,8 @@
 import DebugWindow from './window';
 import Formatter from 'utils/formatter';
 
+const coreLog = log;
+
 export default {
   TYPES: {
     DEFAULT: 'default',
@@ -10,9 +12,12 @@ export default {
     TIMER: 'timer'
   },
 
+  timers: {},
+  counters: {},
+
   log (...args) {
     args.forEach(arg => {
-      log(arg);
+      coreLog(arg);
     });
     DebugWindow.sendLog(args, this.TYPES.DEFAULT);
   },
@@ -35,16 +40,23 @@ export default {
     DebugWindow.sendLog(args, this.TYPES.ERROR);
   },
 
-  count (log) {
-
+  count (key) {
+    this.counters[key] = this.counters[key] ? this.counters[key] + 1 : 1;
+    log(`### COUNTER: ${this.counter[key]} - ${key}`);
   },
 
   time (key) {
-
+    this.timers[key] = new Date().getTime();
+    log(`### TIME START - ${key}`);
   },
 
   timeEnd (key) {
-
+    if (!this.timers[key]) {
+      return;
+    }
+    const duration = new Date().getTime() - this.timers[key];
+    this.timers[key] = null;
+    log(`### TIME END: ${duration}ms - ${key}`);
   },
 
   group (key) {
@@ -101,7 +113,7 @@ export default {
   },
 
   prepareArrayDeep (array) {
-    return array.map(val => this.prepareValue(val));
+    return array.map(v => this.prepareValue(v));
   },
 
   prepareObjectDeep (object) {
@@ -113,17 +125,34 @@ export default {
   },
 
   getStack (withError = new Error()) {
-    if (!withError || !withError.stack) {
-      return [];
-    }
-    const { line, column } = withError;
+    log('getStack')
+    log(withError.stack)
     let stack = withError.stack.split('\n');
     stack = stack.map(s => s.replace(/\s\g/, ''));
-    return { stack, line, column };
-  },
 
-  getFileName (withError = new Error()) {
-    return withError.fileName;
+    stack = stack.map(entry => {
+      let fn = null;
+      let file = null;
+      let line = null;
+      let column = null;
+      let split = entry.split('@');
+      fn = split[0];
+      file = split[1];
+
+      if (file) {
+        split = file.split(':');
+        file = split[0];
+        line = split[1];
+        column = split[2];
+      }
+
+      return {fn, file, line, column};
+    });
+
+    const deleteAllUntil =  stack.findIndex(s => s.fn == 'log');
+    stack.splice(0, deleteAllUntil);
+    
+    return stack;
   }
 };
 

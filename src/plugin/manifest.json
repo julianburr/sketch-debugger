@@ -4,7 +4,6 @@
   "description": "Sketch Debugger",
   "authorEmail": "julian.burr@rexsoftware.com",
   "author": "Julian Burr",
-  "disableCocoaScriptPreprocessor": true,
   "commands": [
     {
       "script": "plugin.js",
