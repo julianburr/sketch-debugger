@@ -75,6 +75,14 @@ export default {
 
   },
 
+  networkRequest (uid, request) {
+
+  },
+
+  networkResponse (uid, response) {
+
+  },
+
   prepareValue (value) {
     let type = 'String';
     const typeOf = typeof value;
@@ -125,8 +133,8 @@ export default {
   },
 
   getStack (withError = new Error()) {
-    log('getStack')
-    log(withError.stack)
+    log('getStack');
+    log(withError.stack);
     let stack = withError.stack.split('\n');
     stack = stack.map(s => s.replace(/\s\g/, ''));
 
@@ -146,12 +154,16 @@ export default {
         column = split[2];
       }
 
-      return {fn, file, line, column};
+      const filePath = file;
+      file = file.split('/');
+      file = file[file.length - 1];
+
+      return { fn, file, filePath, line, column };
     });
 
-    const deleteAllUntil =  stack.findIndex(s => s.fn == 'log');
+    const deleteAllUntil = stack.findIndex(s => s.fn == 'log');
     stack.splice(0, deleteAllUntil);
-    
+
     return stack;
   }
 };

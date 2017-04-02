@@ -92,7 +92,7 @@ export default class LogList extends Component {
                       );
                     })}
                   </ul>
-                  <span className='file'>{log.file}</span>
+                  <span className='file'>{log.stack && log.stack[0].file}</span>
                 </li>
               );
             })}

@@ -30,7 +30,7 @@ export default {
     const script = `sketchBridge('${JSON.stringify({name, payload})}');`;
     log('sendAction');
     log(script);
-    const check = webView.evaluateJavaScript_completionHandler(script, null);
+    webView.evaluateJavaScript_completionHandler(script, null);
   },
 
   receiveAction (name, payload = {}) {

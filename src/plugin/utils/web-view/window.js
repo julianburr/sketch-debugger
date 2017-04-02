@@ -1,4 +1,3 @@
-import Core from 'utils/core';
 import WebViewCore from './web-view';
 
 export default {
