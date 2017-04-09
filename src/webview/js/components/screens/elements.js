@@ -17,9 +17,13 @@ export default class Elements extends Component {
   render () {
     return (
       <div className='elements tab-content-inner'>
-        <div className='element-tree'>
-          {this.props.tree.map(e => <ElementTreeItem element={e} />)}
-        </div>
+        {this.props.tree.length > 0 ? (
+          <div className='element-tree'>
+            {this.props.tree.map((e, i) => <ElementTreeItem key={i} element={e} />)}
+          </div>
+        ) : (
+          <p className='empty'>No Elements found! We'll keep looking, just to be sure ;)</p>
+        )}
       </div>
     );
   }
@@ -33,32 +37,39 @@ export class ElementTreeItem extends Component {
     };
   }
 
+  renderElementName () {
+    const { element } = this.props;
+    return (
+      <span>
+        <span className='element-class'>{element.class}</span>
+        {element.meta && element.meta.name && <span className='element-name'> {element.meta.name}</span>}
+      </span>
+    );
+  }
+
   renderElement () {
     const { element } = this.props;
 
-    if (this.state.expanded) {
+    if (element.children.length > 0) {
       return (
-        <li>
+        <li className={`tree-element ${this.state.expanded && 'tree-element-expanded'}`}>
           <button className="btn-expand" onClick={() => this.setState({expanded: !this.state.expanded})}>></button>
-          <span className='wrap-element'>&lt;{element.class}&gt;</span>
-          {element.children.map(e => <ElementTreeItem element={e} />)}
-          <span className='wrap-element-close'>&lt;/{element.class}&gt;</span>
-        </li>
-      );
-    }
-
-    if (!this.state.expanded && element.children.length > 0) {
-      return (
-        <li>
-          <button className="btn-expand" onClick={() => this.setState({expanded: !this.state.expanded})}>></button>
-          <span className='wrap-element'>&lt;{element.class} /&gt;</span>
+          {this.state.expanded ? (
+            <span>
+              <span className='wrap-element'>&lt;{this.renderElementName()}&gt;</span>
+              {element.children.map((e, i) => <ElementTreeItem key={i} element={e} />)}
+              <span className='wrap-element-close'>&lt;/{this.renderElementName()}&gt;</span>
+            </span>
+          ) : (
+            <span className='wrap-element wrap-element-self-close'>&lt;{this.renderElementName()} /&gt;</span>
+          )}
         </li>
       );
     }
 
     return (
-      <li>
-        <span className='wrap-element'>&lt;{element.class} /&gt;</span>
+      <li className='tree-element'>
+        <span className='wrap-element'>&lt;{this.renderElementName()} /&gt;</span>
       </li>
     );
   }

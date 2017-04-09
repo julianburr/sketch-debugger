@@ -6,11 +6,13 @@ import rootReducer from './reducers';
 import { defaultState as bridge } from './reducers/bridge';
 import { defaultState as console } from './reducers/console';
 import { defaultState as elements } from './reducers/elements';
+import { defaultState as network } from './reducers/network';
 
 const defaultState = {
   bridge,
   console,
-  elements
+  elements,
+  network
 };
 
 const store = createStore(rootReducer, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

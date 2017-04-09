@@ -1,8 +1,96 @@
 .elements {
+  background: $colors-background;
+
+  .empty {
+    margin: 4rem 0 0 -12rem;
+    width: 24rem;
+    padding: 0 0 0 50%;
+    box-sizing: content-box;
+    text-align: center;
+    color: $colors-grey;
+  }
 
   .element-tree {
     flex: 1;
     padding: 1.5rem;
     overflow: auto;
+    font-family: $fonts-mono;
+
+    ul, li {
+      list-style: none;
+      marign: 0;
+      padding: 0;
+    }
+
+    ul {
+      padding: 0 0 0 2rem;
+
+      li {
+        position: relative;
+        padding: .5rem 0;
+
+        .wrap-element,
+        .wrap-element-close {
+          color: $colors-grey;
+        }
+
+        .element-class {
+          color: darken($colors-red, 10%);
+          padding: 0 .2rem;
+        }
+
+        .element-name {
+          font-style: italic;
+          color: $colors-grey;
+        }
+
+        .btn-expand {
+          position: absolute;
+          top: .5rem;
+          left: -1.5rem;
+          text-indent: -999px;
+          overflow: hidden;
+          color: inherit;
+          border: 0 none;
+          background: none transparent;
+          text-indent: -100rem;
+          padding: 0;
+          margin: .2rem 0 0;
+          width: 1.2rem;
+          height: 1.2rem;
+          transition: transform .2s;
+
+          &:before {
+            content: ' ';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -.4rem 0 0 -.3rem;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: .4rem 0 .4rem .6rem;
+            border-color: transparent transparent transparent currentColor;
+          }
+        }
+
+        &.tree-element-expanded {
+
+          &:before {
+            content: ' ';
+            position: absolute;
+            top: 2rem;
+            bottom: 1rem;
+            left: -1rem;
+            width: .1rem;
+            background: lighten($colors-grey, 10%);
+          }
+
+          > .btn-expand {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
   }
 }
