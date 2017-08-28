@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import LogList from 'components/console/log-list';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import NetworkRequest from 'components/network/network-request';
 
 const mapStateToProps = state => {
   return {
@@ -17,7 +17,10 @@ export default class Network extends Component {
   render () {
     return (
       <div className='network tab-content-inner'>
-        <pre>{JSON.stringify(this.props.requests, null, 2)}</pre>
+        <div className='filters'></div>
+        <div className='network-requests'>
+          {this.props.requests.map((r, i) => <NetworkRequest key={i} data={r} />)}
+        </div>
       </div>
     );
   }

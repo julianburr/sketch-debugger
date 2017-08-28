@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => {
   return {
     pathName: state.routing && state.routing.locationBeforeTransitions && state.routing.locationBeforeTransitions.pathname
-  }
-}
+  };
+};
 
 @connect(mapStateToProps)
 export default class Link extends Component {

@@ -19,8 +19,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     selectValue: (key, value) => dispatch(selectValue(key, value))
-  }
-}
+  };
+};
 
 @connect(mapStateToProps, mapDispatchToProps)
 @autobind
@@ -45,7 +45,7 @@ export default class LogList extends Component {
         return false;
       }
       return true;
-    })
+    });
   }
 
   handleLogScroll (e) {
@@ -62,7 +62,7 @@ export default class LogList extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    console.log('this._refs', this._refs)
+    console.log('this._refs', this._refs);
     if (this.state.autoScroll && prevProps.logs.length !== this.props.logs.length) {
       this._refs.logList.scrollTop = this._refs.logList.scrollHeight;
     }
@@ -82,8 +82,8 @@ export default class LogList extends Component {
                   <ul className='values'>
                     {log.values.map((value, k) => {
                       return (
-                        <li 
-                          className={`value ${this.props.selectedLog === `${i}-${k}` ? 'selected' : ''}`} 
+                        <li
+                          className={`value ${this.props.selectedLog === `${i}-${k}` ? 'selected' : ''}`}
                           key={`${i}-${k}`}
                           onClick={() => this.props.selectValue(`${i}-${k}`, value)}
                         >

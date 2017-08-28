@@ -1,3 +1,77 @@
 .network {
   background: $colors-background;
+  flex-direction: column;
+
+  .network-requests {
+    flex: 1;
+    padding: .4rem;
+  }
+
+  .network-request {
+    padding: .7rem;
+    margin: 0 0 .4rem 0;
+
+
+    .request-data {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      cursor: pointer;
+      font-family: $fonts-mono;
+
+      .request-label {
+        display: flex;
+        width: 22rem;
+        white-space: nowrap;
+        font-size: 1.1rem;
+      }
+
+      .request-timeline {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .bar {
+          height: .5rem;
+          width: 0rem;
+          background: $colors-green;
+          display: flex;
+          opacity: .5;
+          transition: width .4s, opacity .2s;
+        }
+
+        .time {
+          font-size: 1rem;
+          font-style: italic;
+          color: $colors-grey;
+          margin: 0 0 0 1rem;
+        }
+      }
+    }
+
+    .request-details {
+      display: none;
+    }
+
+    &.expanded {
+      background: none $colors-white;
+      box-shadow: $shadows-box-light;
+
+      .request-details {
+        display: block;
+      }
+    }
+
+    &.expanded,
+    &:hover {
+      .request-data {
+        .request-timeline {
+          .bar {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
 }

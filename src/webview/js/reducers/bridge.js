@@ -33,12 +33,12 @@ export default (state, action) => {
 
     case RECEIVE_ACTION:
       switch (action.payload.name) {
-        case 'addLog': 
+        case 'addLog':
           setTimeout(() => {
             store.dispatch(addLog(action.payload.payload));
           });
           break;
-        case 'setElementTree': 
+        case 'setElementTree':
           setTimeout(() => {
             store.dispatch(setTree(action.payload.payload));
           });

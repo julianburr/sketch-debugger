@@ -21,7 +21,7 @@ export default class LogArray extends Component {
   render () {
     return (
       <span className={`log-array ${!this.state.collapsed ? 'expanded' : ''}`}>
-        <button 
+        <button
           onClick={() => this.setState({collapsed: !this.state.collapsed})}
           className='button-toggle'
         >&gt;</button>

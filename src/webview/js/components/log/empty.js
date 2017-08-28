@@ -11,7 +11,7 @@ export default class LogEmpty extends Component {
           </span>
         )}
         <span className='log-value'>
-          {this.props.value === undefined ? 'undefined' 
+          {this.props.value === undefined ? 'undefined'
             : Number.isNan(this.props.value) ? 'NaN'
             : 'null'}
         </span>

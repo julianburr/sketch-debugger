@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
     setTypes: types => dispatch(setTypes(types)),
     clearLogs: () => dispatch(clearLogs()),
     setShowLogTimes: show => dispatch(setShowLogTimes(show))
-  }
+  };
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -45,21 +45,21 @@ export default class Console extends Component {
           <div className='filters-inner'>
             <div className='filter search'>
               <button className={`filter-button ${this.props.searchOpen && 'active'}`} onClick={() => {
-                this._refs.searchInput.focus()
+                this._refs.searchInput.focus();
                 this.props.setSearchOpen(!this.props.searchOpen);
               }}>
                 <span className='icon icon-search' />
                 <span className={`indicator ${this.props.search && 'active'}`} />
               </button>
               <div className={`search-panel ${this.props.searchOpen && 'active'}`}>
-                <input 
-                  ref={c => this._refs.searchInput = c} 
-                  type='text' 
-                  placeholder='Type search...' 
+                <input
+                  ref={c => this._refs.searchInput = c}
+                  type='text'
+                  placeholder='Type search...'
                   onChange={e => this.props.setSearch(e.target.value)}
                   value={this.props.search}
                 />
-                <button 
+                <button
                   className={`clear-search ${this.props.search && 'visible'}`}
                   onClick={() => {
                     this.props.setSearch('');
@@ -75,7 +75,7 @@ export default class Console extends Component {
                     key={type}
                     onClick={() => {
                       this.props.setTypes({...this.props.types, [type]: !this.props.types[type]});
-                    }} 
+                    }}
                     className={`
                       filter-button 
                       type 
@@ -87,13 +87,13 @@ export default class Console extends Component {
               })}
             </div>
             <div className='filter show-log-times'>
-              <button 
+              <button
                 className={`filter-button ${this.props.showLogTimes && 'active'}`}
                 onClick={() => this.props.setShowLogTimes(!this.props.showLogTimes)}
               ><span className='icon icon-schedule' /></button>
             </div>
             <div className='filter clear-console'>
-              <button 
+              <button
                 className='filter-button'
                 onClick={() => this.props.clearLogs()}
               ><span className='icon icon-delete_sweep' /></button>

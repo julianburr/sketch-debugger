@@ -1,5 +1,5 @@
 export const ADD_REQUEST = 'sketch/network/ADD_REQUEST';
-export const SET_RESPONSE = 'sketch/network/SET_RESPONSE'
+export const SET_RESPONSE = 'sketch/network/SET_RESPONSE';
 
 export const addRequest = (request, uid) => {
   return {

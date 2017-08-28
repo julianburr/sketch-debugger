@@ -2,7 +2,43 @@ import { ADD_REQUEST, SET_RESPONSE } from 'actions/elements';
 import moment from 'moment';
 
 export let defaultState = {
-  requests: []
+  requests: [{
+    uid: '123',
+    request: {
+      url: 'http://www.foo.bar',
+      protocol: 'http',
+      args: {
+        foo: 'bar'
+      },
+      type: 'POST'
+    },
+    started: moment().subtract(2, 'seconds'),
+    finished: moment(),
+    response: {
+      code: 200,
+      body: {
+        foo: 'bar'
+      }
+    }
+  }, {
+    uid: '123',
+    request: {
+      url: 'http://www.foo.bar',
+      protocol: 'http',
+      args: {
+        foo: 'bar'
+      },
+      type: 'POST'
+    },
+    started: moment().subtract(1, 'seconds'),
+    finished: moment(),
+    response: {
+      code: 200,
+      body: {
+        foo: 'bar'
+      }
+    }
+  }]
 };
 
 export default (state, action) => {
