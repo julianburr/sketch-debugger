@@ -1,44 +1,57 @@
 import { ADD_REQUEST, SET_RESPONSE } from 'actions/elements';
-import moment from 'moment';
 
 export let defaultState = {
-  requests: [{
-    uid: '123',
-    request: {
-      url: 'http://www.foo.bar',
-      protocol: 'http',
-      args: {
-        foo: 'bar'
+  requests: [
+    {
+      id: '123',
+      request: {
+        url: 'http://www.foo.bar',
+        protocol: 'http',
+        args: {
+          foo: 'bar'
+        },
+        method: 'POST',
+        ts: new Date().getTime() - 2000
       },
-      type: 'POST'
-    },
-    started: moment().subtract(2, 'seconds'),
-    finished: moment(),
-    response: {
-      code: 200,
-      body: {
-        foo: 'bar'
+      response: {
+        code: 200,
+        body: {
+          foo: 'bar'
+        },
+        ts: new Date().getTime() - 500
       }
-    }
-  }, {
-    uid: '123',
-    request: {
-      url: 'http://www.foo.bar',
-      protocol: 'http',
-      args: {
-        foo: 'bar'
+    },
+    {
+      id: '456',
+      request: {
+        url: 'http://www.bar.foo',
+        protocol: 'http',
+        args: {
+          foo: 'bar'
+        },
+        method: 'GET',
+        ts: new Date().getTime() - 1000
       },
-      type: 'POST'
-    },
-    started: moment().subtract(1, 'seconds'),
-    finished: moment(),
-    response: {
-      code: 200,
-      body: {
-        foo: 'bar'
+      response: {
+        code: 404,
+        body: null,
+        ts: new Date().getTime() - 600
       }
+    },
+    {
+      id: '456',
+      request: {
+        url: 'http://www.hello.world',
+        protocol: 'http',
+        args: {
+          foo: 'bar'
+        },
+        method: 'PATCH',
+        ts: new Date().getTime() - 200
+      },
+      response: {}
     }
-  }]
+  ]
 };
 
 export default (state, action) => {
@@ -54,27 +67,28 @@ export default (state, action) => {
         requests: [
           ...state.requests,
           {
-            uid: action.payload.uid,
+            id: action.payload.id,
             request: action.payload.request,
-            started: moment(),
-            finished: false,
-            response: null
+            response: {}
           }
         ]
       };
       break;
 
     case SET_RESPONSE:
-      const findRequestIndex = state.requests.findIndex(r => r.uid === action.payload.uid);
+      const findRequestIndex = state.requests.findIndex(
+        r => r.id === action.payload.id
+      );
       if (findRequestIndex === -1) {
-        console.error(`Cannot find request for response with uid ${action.payload.uid}!`);
+        console.error(
+          `Cannot find request for response with id ${action.payload.id}!`
+        );
         return state;
       }
 
-      let requests = [...state.requests];
+      let requests = [ ...state.requests ];
       requests[findRequestIndex] = {
         ...requests.findRequestIndex,
-        finished: moment(),
         response: action.payload.response
       };
 

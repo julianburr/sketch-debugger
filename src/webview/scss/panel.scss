@@ -1,0 +1,87 @@
+.wrap-panels {
+  display: flex;
+  flex: 1;
+  background: $colors-background;
+  flex-direction: row;
+  padding: .2rem;
+
+  .panel-list {
+    display: flex;
+    flex: 1;
+    min-width: 30rem;
+    max-width: 30rem;
+    flex-direction: column;
+    padding: .2rem;
+
+    .panel-list-item {
+      margin: 0 0 .2rem 0;
+      padding: 0 .6rem;
+      display: flex;
+      height: 3.8rem;
+      align-items: center;
+      width: 100%;
+      background: $colors-white;
+      cursor: pointer;
+      box-shadow: $shadows-box-light;
+      transition: background .2s, opacity .2s;
+
+      &:hover {
+        opacity: .8;
+      }
+
+      &.selected {
+        background: $colors-green;
+      }
+    }
+  }
+
+  .panel-timelines {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: .2rem .2rem .2rem 0;
+    font-family: $fonts-mono;
+
+    .panel-timeline {
+      display: flex;
+      height: 3.8rem;
+      align-items: center;
+      width: 100%;
+      margin: 0 0 .2rem 0;
+      padding: 0 .5rem;
+      flex-direction: row;
+
+      .panel-timeline-bar {
+        height: 2rem;
+        background: $colors-green;
+        display: inline-flex;
+        margin: 0 .4rem 0 0;
+      }
+
+      .panel-timeline-value {
+        display: flex;
+        font-size: 80%;
+      }
+
+      .panel-timeline-pending {
+        font-size: 80%;
+        color: $colors-grey;
+      }
+    }
+  }
+
+  .panel-details {
+    flex: 1;
+    background: $colors-white;
+    box-shadow: $shadows-box-light;
+    padding: 1.4rem;
+    position: relative;
+    margin: -.2rem -.2rem -.2rem 0;
+
+    .close-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+}

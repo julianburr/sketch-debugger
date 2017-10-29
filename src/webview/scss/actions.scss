@@ -1,0 +1,18 @@
+.actions {
+  background: $colors-background;
+  flex-direction: column;
+
+  .wrap-panels {
+    .panel-list {
+      .panel-list-item {
+        .action-count {
+          display: inline-block;
+          font-size: 70%;
+          margin: .3rem 0 0 .4rem;
+          color: $colors-grey;
+          font-family: $fonts-mono;
+        }
+      }
+    }
+  }
+}

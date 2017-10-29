@@ -19,12 +19,16 @@ body {
   box-sizing: border-box;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font: inherit;
 }
 
-textarea, input, button { 
-  outline: none; 
+textarea,
+input,
+button {
+  outline: none;
 }
 
 button {
@@ -46,4 +50,6 @@ button {
 
 @import './console';
 @import './elements';
+@import './panel';
 @import './network';
+@import './actions';

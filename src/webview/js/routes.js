@@ -7,6 +7,7 @@ import App from 'components/screens/app';
 import Console from 'components/screens/console';
 import Elements from 'components/screens/elements';
 import Network from 'components/screens/network';
+import Actions from 'components/screens/actions';
 import NotFound from 'components/screens/404';
 
 class Redirect extends Component {
@@ -23,12 +24,13 @@ export default class Routes extends Component {
   render () {
     return (
       <Router history={history}>
-        <Route path='/' component={App}>
-          <IndexRoute component={() => <Redirect to='/console' />} />
-          <Route path='console' component={Console} />
-          <Route path='elements' component={Elements} />
-          <Route path='network' component={Network} />
-          <Route path='*' component={NotFound} />
+        <Route path="/" component={App}>
+          <IndexRoute component={() => <Redirect to="/console" />} />
+          <Route path="console" component={Console} />
+          <Route path="elements" component={Elements} />
+          <Route path="network" component={Network} />
+          <Route path="actions" component={Actions} />
+          <Route path="*" component={NotFound} />
         </Route>
       </Router>
     );

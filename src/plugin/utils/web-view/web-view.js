@@ -1,4 +1,3 @@
-
 import Core from 'utils/core';
 
 export default {
@@ -12,13 +11,20 @@ export default {
   createWebView (path, frame) {
     const config = WKWebViewConfiguration.alloc().init();
     const messageHandler = SPBWebViewMessageHandler.alloc().init();
-    config.userContentController().addScriptMessageHandler_name(messageHandler, 'Sketch');
+    config
+      .userContentController()
+      .addScriptMessageHandler_name(messageHandler, 'Sketch');
 
-    const webView = WKWebView.alloc().initWithFrame_configuration(frame, config);
+    const webView = WKWebView.alloc().initWithFrame_configuration(
+      frame,
+      config
+    );
     const url = NSURL.fileURLWithPath(this.getFilePath(path));
 
     webView.setAutoresizingMask(NSViewWidthSizable | NSViewHeightSizable);
     webView.loadRequest(NSURLRequest.requestWithURL(url));
+
+    webView.movableByWindowBackground = true;
 
     return webView;
   },
@@ -27,7 +33,7 @@ export default {
     if (!webView || !webView.evaluateJavaScript_completionHandler) {
       return;
     }
-    const script = `sketchBridge('${JSON.stringify({name, payload})}');`;
+    const script = `sketchBridge('${JSON.stringify({ name, payload })}');`;
     log('sendAction');
     log(script);
     webView.evaluateJavaScript_completionHandler(script, null);

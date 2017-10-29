@@ -4,6 +4,7 @@ import LogObject from './object';
 import LogArray from './array';
 import LogString from './string';
 import LogNumber from './number';
+import LogClass from './class';
 import LogEmpty from './empty';
 
 export default class Value extends Component {
@@ -11,26 +12,34 @@ export default class Value extends Component {
   static defaultProps = {};
 
   render () {
-    const { value, logKey } = this.props;
+    const { value } = this.props;
     switch (value.type) {
-      case 'Array':
-      case 'NSArray':
-      case 'NSMutuableArray':
-        return <LogArray array={value.value} logKey={logKey} prefix={value.type} />;
+      case 'array':
+        return (
+          <LogArray array={value.value} name={value.name} prefix={value.type} />
+        );
 
-      case 'Object':
-      case 'NSDictionary':
-        return <LogObject object={value.value} logKey={logKey} prefix={value.type} />;
+      case 'object':
+        return (
+          <LogObject
+            object={value.value}
+            name={value.name}
+            prefix={value.type}
+          />
+        );
 
-      case 'Number':
-        return <LogNumber number={value.value} logKey={logKey} />;
+      case 'number':
+        return <LogNumber number={value.value} name={value.name} />;
 
-      case 'Empty':
-        return <LogEmpty number={value.value} logKey={logKey} />;
+      case 'empty':
+        return <LogEmpty number={value.value} name={value.name} />;
 
-      case 'String':
+      case 'class':
+        return <LogClass value={value.value} name={value.name} />;
+
+      case 'string':
       default:
-        return <LogString string={String(value.value)} logKey={logKey} />;
+        return <LogString string={String(value.value)} name={value.name} />;
     }
   }
 }

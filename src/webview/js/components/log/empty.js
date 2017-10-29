@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 
 export default class LogEmpty extends Component {
   render () {
+    const { name, value } = this.props;
     return (
-      <span className='log-empty'>
-        {this.props.logKey && (
+      <span className="log-empty">
+        {name && (
           <span>
-            <span className='log-key'>{this.props.logKey}</span>
-            <span className='log-colon'>: </span>
+            <span className="log-key">{name}</span>
+            <span className="log-colon">: </span>
           </span>
         )}
-        <span className='log-value'>
-          {this.props.value === undefined ? 'undefined'
-            : Number.isNan(this.props.value) ? 'NaN'
-            : 'null'}
+        <span className="log-value">
+          {value === undefined ? (
+            'undefined'
+          ) : Number.isNan(value) ? (
+            'NaN'
+          ) : (
+            'null'
+          )}
         </span>
       </span>
     );

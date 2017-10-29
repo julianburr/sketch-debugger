@@ -1,8 +1,46 @@
 import { SET_TREE } from 'actions/elements';
-import moment from 'moment';
 
 export let defaultState = {
-  tree: []
+  tree: [
+    {
+      class: 'MSDocument',
+      id: 'doc-1',
+      props: {},
+      meta: {},
+      children: [
+        {
+          class: 'MSPage',
+          id: 'page-1',
+          props: {
+            name: 'Page 1'
+          },
+          meta: {},
+          children: []
+        },
+        {
+          class: 'MSPage',
+          id: 'page-2',
+          props: {
+            name: 'Symbols'
+          },
+          meta: {},
+          children: [
+            {
+              class: 'MSSymbolMaster',
+              id: 'symbol-1',
+              props: {
+                name: 'Symbol 1'
+              },
+              meta: {
+                instances: []
+              },
+              children: []
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
 export default (state, action) => {

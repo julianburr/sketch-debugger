@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class NetworkRequest extends Component {
+export default class Action extends Component {
   render () {
     const { data, onSelect, selected } = this.props;
     return (
@@ -8,8 +8,8 @@ export default class NetworkRequest extends Component {
         className={`panel-list-item ${selected && 'selected'}`}
         onClick={onSelect}
       >
-        <span className="network-request-method">{data.request.method}</span>
-        <span className="network-request-label">{data.request.url}</span>
+        <span className="action-name">{data.name}</span>
+        <span className="action-count">#{data.count}</span>
       </div>
     );
   }

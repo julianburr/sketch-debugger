@@ -19,27 +19,31 @@ export default class LogArray extends Component {
   }
 
   render () {
+    const { collapsed } = this.state;
+    const { name, prefix, array } = this.props;
     return (
-      <span className={`log-array ${!this.state.collapsed ? 'expanded' : ''}`}>
+      <span className={`log-array ${!collapsed ? 'expanded' : ''}`}>
         <button
-          onClick={() => this.setState({collapsed: !this.state.collapsed})}
-          className='button-toggle'
-        >&gt;</button>
-        {this.props.logKey && (
+          onClick={() => this.setState({ collapsed: !collapsed })}
+          className="button-toggle"
+        >
+          &gt;
+        </button>
+        {name && (
           <span>
-            <span className='log-key'>{this.props.logKey}</span>
-            <span className='log-colon'>: </span>
+            <span className="log-key">{name}</span>
+            <span className="log-colon">: </span>
           </span>
         )}
-        <span className='log-value-type'>{this.props.prefix}</span>
-        {!this.state.collapsed ? (
+        <span className="log-value-type">{prefix}</span>
+        {!collapsed ? (
           <ul>
-            {this.props.array.map((value, key) => {
+            {array.map((value, key) => {
               return (
                 <li key={key}>
-                  <span className='log-key'>{key}</span>
-                  <span className='log-colon'>: </span>
-                  <span className='log-value'>
+                  <span className="log-key">{key}</span>
+                  <span className="log-colon">: </span>
+                  <span className="log-value">
                     <LogValue value={value} />
                   </span>
                 </li>
@@ -47,7 +51,7 @@ export default class LogArray extends Component {
             })}
           </ul>
         ) : (
-          <span className='log-value-length'>[{this.props.array.length}]</span>
+          <span className="log-value-length">[{array.length}]</span>
         )}
       </span>
     );

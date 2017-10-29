@@ -4,7 +4,7 @@ import LogValue from './value';
 export default class LogObject extends Component {
   static propTypes = {
     prefix: PropTypes.string,
-    logKey: PropTypes.string,
+    name: PropTypes.string,
     object: PropTypes.object.isRequired
   };
 
@@ -20,31 +20,39 @@ export default class LogObject extends Component {
   }
 
   render () {
+    const { name, prefix, object } = this.props;
+    const { collapsed } = this.state;
     return (
       <span className={`log-object ${!this.state.collapsed ? 'expanded' : ''}`}>
         <button
-          onClick={() => this.setState({collapsed: !this.state.collapsed})}
-          className='button-toggle'
-        >&gt;</button>
-        {this.props.logKey && (
+          onClick={() => this.setState({ collapsed: !this.state.collapsed })}
+          className="button-toggle"
+        >
+          &gt;
+        </button>
+        {name && (
           <span>
-            <span className='log-key'>{this.props.logKey}</span>
-            <span className='log-colon'>: </span>
+            <span className="log-key">{name}</span>
+            <span className="log-colon">: </span>
           </span>
         )}
-        <span className='log-value-type'>{this.props.prefix}</span>
-        {!this.state.collapsed ? (
+        <span className="log-value-type">{prefix}</span>
+        {!collapsed ? (
           <ul>
-            {Object.keys(this.props.object).map(key => {
+            {Object.keys(object).map(key => {
               return (
                 <li key={key}>
-                  <LogValue value={this.props.object[key]} logKey={key} />
+                  <LogValue value={object[key]} logKey={key} />
                 </li>
               );
             })}
           </ul>
         ) : (
-          <span className='log-value-length'>{'{'}{Object.keys(this.props.object).length}{'}'}</span>
+          <span className="log-value-length">
+            {'{'}
+            {Object.keys(object).length}
+            {'}'}
+          </span>
         )}
       </span>
     );
