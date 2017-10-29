@@ -1,68 +1,40 @@
-export default {
-  context: null,
-  document: null,
-  selection: null,
-  sketch: null,
+let context = null;
+let document = null;
+let selection = null;
+let sketch = null;
 
-  pluginFolderPath: null,
+let pluginFolderPath = null;
+let frameworkFolderPath = '/Contents/Resources/frameworks/';
 
-  frameworks: {
-    SketchPluginBoilerplate: {
-      SPBWebViewMessageHandler: 'SPBWebViewMessageHandler'
-    }
-  },
+function getPluginFolderPath () {
+  // Get absolute folder path of plugin
+  let split = context.scriptPath.split('/');
+  split.splice(-3, 3);
+  return split.join('/');
+}
 
-  getPluginFolderPath (context) {
-    let split = context.scriptPath.split('/');
-    split.splice(-3, 3);
-    return split.join('/');
-  },
+export function initWithContext (ctx) {
+  // This function needs to be called in the beginning of every entry point!
+  // Set all env variables according to current context
+  context = ctx;
+  document =
+    ctx.document || ctx.actionContext.document || MSDocument.currentDocument();
+  selection = document ? document.selectedLayers() : null;
+  pluginFolderPath = getPluginFolderPath();
 
-  initWithContext (context) {
-    log('initWithContext');
-    this.context = context;
-    this.document =
-      context.document ||
-      context.actionContext.document ||
-      MSDocument.currentDocument();
-    this.selection = this.document.selection;
-    this.sketch = this.context.api();
+  // Here you could load custom cocoa frameworks if you need to
+  // loadFramework('FrameworkName', 'ClassName');
+  // => would be loaded into ClassName in global namespace!
+}
 
-    this.pluginFolderPath = this.getPluginFolderPath(context);
-
-    this.loadFrameworks();
-    log('loaded');
-    log(SPBWebViewMessageHandler);
-  },
-
-  loadFrameworks () {
-    for (let framework in this.frameworks) {
-      for (let className in this.frameworks[framework]) {
-        const test = this.loadFramework(
-          framework,
-          this.frameworks[framework][className]
-        );
-        log('test');
-        log(test);
-      }
-    }
-  },
-
-  loadFramework (frameworkName, frameworkClass) {
-    log('Loading framework');
-    log(frameworkName);
-    log(frameworkClass);
-    if (Mocha && NSClassFromString(frameworkClass) == null) {
-      const frameworkDir = `${this
-        .pluginFolderPath}/Contents/Resources/frameworks/`;
-      log(`frameworkDir=${frameworkDir}`);
-      log(this.context.scriptPath);
-      const mocha = Mocha.sharedRuntime();
-      return mocha.loadFrameworkWithName_inDirectory(
-        frameworkName,
-        frameworkDir
-      );
-    }
-    return true;
+export function loadFramework (frameworkName, frameworkClass) {
+  // Only load framework if class not already available
+  if (Mocha && NSClassFromString(frameworkClass) == null) {
+    const frameworkDir = `${pluginFolderPath}${frameworkFolderPath}`;
+    const mocha = Mocha.sharedRuntime();
+    return mocha.loadFrameworkWithName_inDirectory(frameworkName, frameworkDir);
   }
-};
+  return false;
+}
+
+export { context, document, selection, sketch, pluginFolderPath };

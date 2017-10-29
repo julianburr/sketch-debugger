@@ -1,7 +1,10 @@
-import DebugCore from './debug';
-import DebugWindow from './window';
+import { _log as log, warn, error } from './debug';
+import { open } from './window';
 
 export default {
-  ...DebugCore,
-  Window: DebugWindow
+  log,
+  warn,
+  error
 };
+
+export { log, warn, error, open };

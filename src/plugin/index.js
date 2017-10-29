@@ -1,34 +1,17 @@
-import Core from 'utils/core';
-import WebViewUtil from 'utils/web-view';
-import Debug from 'utils/debug/index';
+import { initWithContext, document } from 'utils/core';
+import console, { open } from 'utils/debug';
 
-// eslint-disable-next-line no-unused-vars
-const openWindow = function (context) {
-  Core.initWithContext(context);
-  Debug.Window.open();
-};
+// All exported functions will be exposed as entry points to your plugin
+// and can be referenced in your `manifest.json`
 
-// eslint-disable-next-line no-unused-vars
-const handleBridgeMessage = function (context) {
-  Core.initWithContext(context);
-  let data = SPBWebViewMessageUtils.getPayload();
-  try {
-    data = JSON.parse(data);
-  } catch (err) {
-    Debug.error(err);
-    return;
-  }
-  WebViewUtil.receiveAction(data.name, data.payload);
-};
+export function test (context) {
+  initWithContext(context);
+  document.showMessage('👋🌏 Hello World!');
+  console.log('Hello World');
+  console.warn({ foo: 'bar' });
+}
 
-// eslint-disable-next-line no-unused-vars
-const test = function (context) {
-  Core.initWithContext(context);
-  Debug.log('Hello', 'World');
-  Debug.error('Hello', 'World');
-  // Debug.log('context', context);
-  // const foo = {bar: {x: [{y: {a: {b: 'c'}}}, 'a', 'b', 'c', 1, 2, 3]}};
-  // Debug.warn('foo', foo);
-  // Debug.error('This is aweful'); 2;
-  Debug.Window.sendElementTree();
-};
+export function openWindow (context) {
+  initWithContext(context);
+  open();
+}

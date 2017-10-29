@@ -15,5 +15,5 @@ module.exports = {
       }
     }]
   ],
-  // exclude: 'node_modules/**'
+  cacheDirectory: true
 }

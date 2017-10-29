@@ -1,6 +1,8 @@
 module.exports = {
   presets: [
-    ['es2015', {modules: false}]
+    ['es2015', {
+      modules: false
+    }]
   ],
   'plugins': [
     'transform-object-rest-spread',
@@ -9,6 +11,5 @@ module.exports = {
         utils: './src/plugin/utils'
       }
     }]
-  ],
-  exclude: 'node_modules/**'
+  ]
 }
