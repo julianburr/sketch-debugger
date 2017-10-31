@@ -8,7 +8,10 @@ export default class App extends Component {
     return (
       <div className="app">
         <div className="tab-bar">
-          <ul>
+          <div className="logo">
+            <span className="icon icon-sketch-debugger-logo" />
+          </div>
+          <ul className="top-nav">
             <li>
               <Link to="/console">Console</Link>
             </li>

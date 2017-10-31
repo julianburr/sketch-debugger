@@ -24,7 +24,7 @@ export let defaultState = {
     {
       id: '456',
       request: {
-        url: 'http://www.bar.foo',
+        url: 'http://www.bar.foo/sdsfdsf/dfsdfsdf/sdfsdfsd/fsdfdsfsdfsd',
         protocol: 'http',
         args: {
           foo: 'bar'

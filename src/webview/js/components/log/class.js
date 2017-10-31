@@ -6,7 +6,7 @@ export default class LogClass extends Component {
     return (
       <span className="log-class">
         <span>
-          <span className="log-open">&lt;</span>
+          <span className="log-tag-open">&lt;</span>
           <span className="log-name">{name} </span>
           {value.props &&
             Object.keys(value.props).map(key => (
@@ -18,7 +18,7 @@ export default class LogClass extends Component {
                 </span>
               </span>
             ))}
-          <span className="log-close">&gt;</span>
+          <span className="log-tag-close">&gt;</span>
         </span>
       </span>
     );

@@ -33,9 +33,28 @@ export function open (identifier, path = 'index.html', options = {}) {
 
   window.title = title;
   window.center();
-  window.contentView().addSubview(webView);
+
+  window.movableByWindowBackground = true;
+  window.isMovableByWindowBackground = true;
+
+  let box = NSBox.alloc().initWithFrame(NSMakeRect(0, 300, 100, 100));
+  box.boxType = NSBoxCustom;
+  box.borderType = NSLineBorder;
+  box.fillColor = NSColor.yellowColor(); //NSColor.colorWithCalibratedRed_green_blue_alpha(255.0, 0.0, 0.0, 1.0)
+  box.mouseDownCanMoveWindow = true;
+  box.opaque = true;
+  box.setAcceptsTouchEvents(true);
+  // box.setIgnoresMouseEvents(false);
 
   window.makeKeyAndOrderFront(null);
+
+  window.contentView().addSubview(webView);
+  // window.contentView().addSubview(box);
+
+  log('box');
+  log(box.registeredDraggedTypes());
+  log('window');
+  log(window.isMovableByWindowBackground());
 }
 
 export function findWebView (identifier) {

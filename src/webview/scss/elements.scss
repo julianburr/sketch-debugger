@@ -12,11 +12,14 @@
 
   .element-tree {
     flex: 1;
-    padding: 1.5rem;
+    padding: 1rem;
     overflow: auto;
     font-family: $fonts-mono;
+    font-size: 1.3rem;
+    line-height: 1.8;
 
-    ul, li {
+    ul,
+    li {
       list-style: none;
       marign: 0;
       padding: 0;
@@ -27,7 +30,7 @@
 
       li {
         position: relative;
-        padding: .5rem 0;
+        padding: 0;
 
         .wrap-element,
         .wrap-element-close {
@@ -35,18 +38,30 @@
         }
 
         .element-class {
-          color: darken($colors-red, 10%);
+          color: $colors-purple;
           padding: 0 .2rem;
         }
 
-        .element-name {
+        .wrap-element-prop {
+          .wrap-element-prop-name,
+          .wrap-element-prop-equal {
+            color: $colors-grey;
+            font-style: italic;
+          }
+
+          .wrap-element-prop-value {
+            color: darken($colors-red, 10%);
+          }
+        }
+
+        .wrap-element-child-cnt {
+          color: lighten($colors-grey, 25%);
           font-style: italic;
-          color: $colors-grey;
         }
 
         .btn-expand {
           position: absolute;
-          top: .5rem;
+          top: .4rem;
           left: -1.5rem;
           text-indent: -999px;
           overflow: hidden;
@@ -75,7 +90,6 @@
         }
 
         &.tree-element-expanded {
-
           &:before {
             content: ' ';
             position: absolute;
@@ -83,7 +97,7 @@
             bottom: 1rem;
             left: -1rem;
             width: .1rem;
-            background: lighten($colors-grey, 10%);
+            background: lighten($colors-grey, 25%);
           }
 
           > .btn-expand {

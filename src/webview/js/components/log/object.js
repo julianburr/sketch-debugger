@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import LogValue from './value';
+import _ from 'lodash';
 
 export default class LogObject extends Component {
   static propTypes = {
@@ -36,7 +37,7 @@ export default class LogObject extends Component {
             <span className="log-colon">: </span>
           </span>
         )}
-        <span className="log-value-type">{prefix}</span>
+        <span className="log-value-type">{_.startCase(prefix)}</span>
         {!collapsed ? (
           <ul>
             {Object.keys(object).map(key => {

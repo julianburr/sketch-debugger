@@ -78,7 +78,7 @@ export let defaultState = {
       ]
     },
     {
-      type: 'default',
+      type: 'error',
       plugin: 'SomePlugin.sketchplugin',
       source: {
         file: 'plugin.js',

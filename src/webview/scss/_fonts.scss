@@ -1,7 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900');
 
 @import '../assets/fonts/icomoon/style.css';
 
-$fonts-default: 'Open Sans', Lato, sans-serif;
-$fonts-mono: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+$fonts-default: Montserrat, Lato, sans-serif;
+$fonts-mono: Monaco, Consolas, Menlo, 'Lucida Console', 'Liberation Mono',
+  'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace,
+  serif;
 $fonts-icons: icomoon;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;

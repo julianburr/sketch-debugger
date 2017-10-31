@@ -3,9 +3,7 @@
   background: none $colors-background;
 
   .filter {
-
     &.search {
-
       .indicator {
         position: absolute;
         bottom: .6rem;
@@ -26,10 +24,10 @@
     .search-panel {
       position: absolute;
       z-index: 500;
-      top: .4rem;
+      top: 0;
       left: 100%;
       margin: 0 0 0 -.4rem;
-      height: 3.2rem;
+      height: 4rem;
       opacity: 0;
       transform: scale(.1);
       transform-origin: left center;
@@ -102,7 +100,6 @@
         }
 
         &.type-default {
-
           &.active:before,
           &.active:hover:before {
             background: none $colors-blue;
@@ -110,7 +107,6 @@
         }
 
         &.type-warning {
-
           &.active:before,
           &.active:hover:before {
             background: none $colors-yellow;
@@ -118,7 +114,6 @@
         }
 
         &.type-error {
-
           &.active:before,
           &.active:hover:before {
             background: none $colors-red;
@@ -140,7 +135,7 @@
 
   .log-list {
     flex: 1;
-    padding: .4rem;
+    padding: .6rem;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -152,8 +147,9 @@
       width: 24rem;
       align-self: center;
     }
-    
-    ul, ul li {
+
+    ul,
+    ul li {
       margin: 0;
       padding: 0;
       display: inline-block;
@@ -162,11 +158,10 @@
 
     li.log {
       background: none $colors-white;
-      padding: 1rem;
+      padding: 1rem .5rem;
       margin: .2rem 0 0;
       font-size: 1.1rem;
       font-family: $fonts-mono;
-      box-shadow: $shadows-box-light;
       flex-direction: row;
       display: flex;
       align-items: flex-start;
@@ -187,7 +182,6 @@
         color: $colors-white;
 
         .values li.value {
-
           .log-key,
           .log-string .log-value,
           .log-number .log-value {
@@ -196,7 +190,6 @@
 
           .log-array,
           .log-object {
-
             .log-value-type,
             .log-value-length,
             .log-colon {
@@ -204,19 +197,26 @@
             }
           }
 
-          &.selected,
+          .log-class {
+            .log-name,
+            .log-prop-value {
+              color: $colors-white;
+            }
+          }
+
+          /*&.selected,
           &:hover {
             background: none rgba(255, 255, 255, .1);
-          }
+          }*/
         }
       }
 
-      .values .value {
+      /*.values .value {
         &.selected,
         &:hover {
           background: none rgba(0, 0, 0, .05);
         }
-      }
+      }*/
 
       &:first-child {
         margin: 0;
@@ -224,14 +224,14 @@
 
       .timestamp {
         opacity: .3;
-        padding: 0 1.2rem 0 0;
+        padding: .3rem 1.2rem 0 0;
       }
 
       .values {
         flex: 1;
 
         li.value {
-          margin: -.3rem .3rem 0;
+          margin: 0 .6rem 0;
           padding: .3rem .4rem .2rem;
           border-radius: .2rem;
           cursor: pointer;
@@ -244,7 +244,6 @@
 
           .log-array,
           .log-object {
-
             .log-value-type,
             .log-key,
             .log-colon,
@@ -276,15 +275,34 @@
             font-style: italic;
           }
 
+          .log-class {
+            .log-tag-open,
+            .log-tag-close {
+              opacity: .5;
+            }
+
+            .log-name {
+              color: $colors-purple;
+            }
+
+            .log-prop-name,
+            .log-prop-equal {
+              opacity: .5;
+              font-style: italic;
+            }
+
+            .log-prop-value {
+              color: darken($colors-red, 15%);
+            }
+          }
+
           .log-object,
           .log-array {
-
             & > ul {
-              padding:0 0 0 1.2rem;
+              padding: 0 0 0 1.2rem;
             }
 
             &.expanded {
-              
               & > ul,
               & > ul > li {
                 display: block;

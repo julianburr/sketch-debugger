@@ -3,7 +3,7 @@
   flex: 1;
   background: $colors-background;
   flex-direction: row;
-  padding: .2rem;
+  padding: .6rem;
 
   .panel-list {
     display: flex;
@@ -11,7 +11,7 @@
     min-width: 30rem;
     max-width: 30rem;
     flex-direction: column;
-    padding: .2rem;
+    padding: 0 .4rem 0 0;
 
     .panel-list-item {
       margin: 0 0 .2rem 0;
@@ -22,8 +22,8 @@
       width: 100%;
       background: $colors-white;
       cursor: pointer;
-      box-shadow: $shadows-box-light;
-      transition: background .2s, opacity .2s;
+      transition: background .2s, opacity .2s, color .2s;
+      font-size: 1.2rem;
 
       &:hover {
         opacity: .8;
@@ -31,6 +31,7 @@
 
       &.selected {
         background: $colors-green;
+        color: $colors-white;
       }
     }
   }
@@ -73,10 +74,8 @@
   .panel-details {
     flex: 1;
     background: $colors-white;
-    box-shadow: $shadows-box-light;
     padding: 1.4rem;
     position: relative;
-    margin: -.2rem -.2rem -.2rem 0;
 
     .close-button {
       position: absolute;

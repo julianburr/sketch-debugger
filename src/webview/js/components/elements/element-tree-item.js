@@ -46,7 +46,7 @@ export default class ElementTreeItem extends Component {
                     {' '}
                     <span className="wrap-element-prop-name">{key}</span>
                     <span className="wrap-element-prop-equal">=</span>
-                    <span className="wrap-element-prop-valie">
+                    <span className="wrap-element-prop-value">
                       {JSON.stringify(element.props[key])}
                     </span>
                   </span>
@@ -86,7 +86,7 @@ export default class ElementTreeItem extends Component {
                 {' '}
                 <span className="wrap-element-prop-name">{key}</span>
                 <span className="wrap-element-prop-equal">=</span>
-                <span className="wrap-element-prop-valie">
+                <span className="wrap-element-prop-value">
                   {JSON.stringify(element.props[key])}
                 </span>
               </span>
