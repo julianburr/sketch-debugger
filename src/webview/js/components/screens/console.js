@@ -1,81 +1,76 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import LogList from 'components/console/log-list';
 import _ from 'lodash';
-import {
-  setSearch,
-  setSearchOpen,
-  setTypes,
-  clearLogs,
-  setShowLogTimes
-} from 'actions/console';
+import { actionCreators } from 'data/console';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
     logs: state.console.logs,
     search: state.console.search,
-    searchOpen: state.console.searchOpen,
-    types: state.console.types,
-    showLogTimes: state.console.showLogTimes
+    showSearch: state.console.showSearch,
+    showTypes: state.console.showTypes,
+    showTimes: state.console.showTimes
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setSearch: search => dispatch(setSearch(search)),
-    setSearchOpen: open => dispatch(setSearchOpen(open)),
-    setTypes: types => dispatch(setTypes(types)),
-    clearLogs: () => dispatch(clearLogs()),
-    setShowLogTimes: show => dispatch(setShowLogTimes(show))
+    setSearch: search => dispatch(actionCreators.setSearch({ search })),
+    setShowSearch: show => dispatch(actionCreators.setShowSearch({ show })),
+    setShowTypes: types => dispatch(actionCreators.setShowTypes({ types })),
+    clearLogs: () => dispatch(actionCreators.clearLogs()),
+    setShowTimes: show => dispatch(actionCreators.setShowTimes({ show }))
   };
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Console extends Component {
-  static propTypes = {};
-  static defaultProps = {};
-
   constructor () {
     super();
-    this.state = {
-      searchPanelOpen: false,
-      searchTerm: ''
-    };
     this._refs = {};
   }
 
   render () {
+    const {
+      showSearch,
+      setSearch,
+      setShowSearch,
+      showTimes,
+      showTypes,
+      setShowTypes,
+      setShowTimes,
+      search,
+      clearLogs,
+      logs
+    } = this.props;
     return (
       <div className="console tab-content-inner">
         <div className="filters">
           <div className="filters-inner">
             <div className="filter search">
               <button
-                className={`filter-button ${this.props.searchOpen && 'active'}`}
+                className={`filter-button ${showSearch && 'active'}`}
                 onClick={() => {
                   this._refs.searchInput.focus();
-                  this.props.setSearchOpen(!this.props.searchOpen);
+                  setShowSearch(!showSearch);
                 }}
               >
                 <span className="icon icon-search" />
-                <span
-                  className={`indicator ${this.props.search && 'active'}`}
-                />
+                <span className={`indicator ${search && 'active'}`} />
               </button>
-              <div
-                className={`search-panel ${this.props.searchOpen && 'active'}`}
-              >
+              <div className={`search-panel ${showSearch && 'active'}`}>
                 <input
                   ref={c => (this._refs.searchInput = c)}
                   type="text"
                   placeholder="Type search..."
-                  onChange={e => this.props.setSearch(e.target.value)}
-                  value={this.props.search}
+                  onChange={e => setSearch(e.target.value)}
+                  value={search}
                 />
                 <button
-                  className={`clear-search ${this.props.search && 'visible'}`}
+                  className={`clear-search ${search && 'visible'}`}
                   onClick={() => {
-                    this.props.setSearch('');
+                    setSearch('');
                     this._refs.searchInput.focus();
                   }}
                 >
@@ -89,16 +84,21 @@ export default class Console extends Component {
                   <button
                     key={type}
                     onClick={() => {
-                      this.props.setTypes({
-                        ...this.props.types,
-                        [type]: !this.props.types[type]
+                      let newTypes = [ ...showTypes ];
+                      if (newTypes.includes(type)) {
+                        newTypes.filter(t => t !== type);
+                      } else {
+                        newTypes.push(type);
+                      }
+                      setShowTypes({
+                        types: newTypes
                       });
                     }}
                     className={`
                       filter-button 
                       type 
                       type-${type} 
-                      ${this.props.types[type] && 'active'}
+                      ${showTypes.includes(type) && 'active'}
                     `}
                   >
                     k
@@ -108,25 +108,20 @@ export default class Console extends Component {
             </div>
             <div className="filter show-log-times">
               <button
-                className={`filter-button ${this.props.showLogTimes &&
-                  'active'}`}
-                onClick={() =>
-                  this.props.setShowLogTimes(!this.props.showLogTimes)}
+                className={`filter-button ${showTimes && 'active'}`}
+                onClick={() => setShowTimes(!showTimes)}
               >
                 <span className="icon icon-schedule" />
               </button>
             </div>
             <div className="filter clear-list">
-              <button
-                className="filter-button"
-                onClick={() => this.props.clearLogs()}
-              >
+              <button className="filter-button" onClick={() => clearLogs()}>
                 <span className="icon icon-delete_sweep" />
               </button>
             </div>
           </div>
         </div>
-        <LogList logs={this.props.logs} />
+        <LogList logs={logs} />
       </div>
     );
   }

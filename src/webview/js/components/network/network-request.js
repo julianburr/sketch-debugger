@@ -9,13 +9,13 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 export default class NetworkRequest extends Component {
   render () {
-    const { data, onSelect, selected } = this.props;
+    const { data, onSelect, selected, showTimes } = this.props;
     return (
       <div
         className={`panel-list-item ${selected && 'selected'}`}
         onClick={onSelect}
       >
-        {this.props.showTimes && (
+        {showTimes && (
           <span className="timestamp">
             {moment(data.request.ts).format('HH:mm:ss.SSS')}
           </span>

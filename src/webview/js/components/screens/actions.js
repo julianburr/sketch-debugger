@@ -1,91 +1,129 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import { actionCreators } from 'data/actions';
 import Action from 'components/actions/action';
 import ActionTimeline from 'components/actions/action-timeline';
 import ActionDetails from 'components/actions/action-details';
 
-const mapStateToProps = state => {
-  return {
-    actions: state.actions.actions
-  };
-};
+const mapStateToProps = state => ({
+  actions: state.actions.actions,
+  search: state.actions.search,
+  showSearch: state.actions.showSearch,
+  showTimes: state.actions.showTimes
+});
 
-@connect(mapStateToProps)
+const mapDispatchToProps = dispatch => ({
+  clearActions: () => dispatch(actionCreators.clearActions()),
+  setSearch: search => dispatch(actionCreators.setSearch({ search })),
+  setShowSearch: show => dispatch(actionCreators.setShowSearch({ show })),
+  setShowTimes: show => dispatch(actionCreators.setShowTimes({ show }))
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Actions extends Component {
-  static propTypes = {};
-  static defaultProps = {};
-
   constructor () {
     super();
     this.state = {
       selected: null
     };
+    this._refs = {};
   }
 
   render () {
-    const { actions } = this.props;
+    const {
+      actions,
+      showSearch,
+      search,
+      showTimes,
+      setShowTimes,
+      setShowSearch,
+      setSearch,
+      clearActions
+    } = this.props;
     const { selected } = this.state;
-
-    let combinedActions = actions.map(a => ({ ...a }));
-    let actionCounts = {};
-
-    let i = 0;
-    while (combinedActions[i]) {
-      const action = combinedActions[i];
-      if (action.name.endsWith('.start')) {
-        const actionBase = action.name.substr(0, action.name.length - 6);
-        const finishIndex = combinedActions.findIndex(
-          (a, index) => a.name === `${actionBase}.finish` && index > i
-        );
-        if (finishIndex === -1) {
-          combinedActions[i].duration = null;
-        } else {
-          combinedActions[i].name = actionBase;
-          combinedActions[i].duration =
-            combinedActions[finishIndex].ts - action.ts;
-          combinedActions[i].finish = { ...combinedActions[finishIndex] };
-          delete combinedActions[finishIndex];
-        }
-      }
-      if (!actionCounts[combinedActions[i].name]) {
-        actionCounts[combinedActions[i].name] = 1;
-      } else {
-        actionCounts[combinedActions[i].name]++;
-      }
-      combinedActions[i].count = actionCounts[combinedActions[i].name];
-      i++;
-    }
 
     return (
       <div className="actions tab-content-inner">
-        <div className="filters" />
-        <div className="wrap-panels">
-          <div className="panel-list">
-            {combinedActions.map((action, i) => (
-              <Action
-                key={i}
-                data={action}
-                onSelect={() => this.setState({ selected: action })}
-                selected={selected === action}
-              />
-            ))}
-          </div>
-          {selected ? (
-            <div className="panel-details">
-              <ActionDetails
-                data={selected}
-                onClose={() => this.setState({ selected: null })}
-              />
+        <div className="filters">
+          <div className="filters-inner">
+            <div className="filter search">
+              <button
+                className={`filter-button ${showSearch && 'active'}`}
+                onClick={() => {
+                  this._refs.searchInput.focus();
+                  setShowSearch(!showSearch);
+                }}
+              >
+                <span className="icon icon-search" />
+                <span className={`indicator ${search && 'active'}`} />
+              </button>
+              <div className={`search-panel ${showSearch && 'active'}`}>
+                <input
+                  ref={c => (this._refs.searchInput = c)}
+                  type="text"
+                  placeholder="Type search..."
+                  onChange={e => setSearch(e.target.value)}
+                  value={search}
+                />
+                <button
+                  className={`clear-search ${search && 'visible'}`}
+                  onClick={() => {
+                    setSearch('');
+                    this._refs.searchInput.focus();
+                  }}
+                >
+                  &times;
+                </button>
+              </div>
             </div>
-          ) : (
-            <div className="panel-timelines">
-              {combinedActions.map((action, i) => (
-                <ActionTimeline key={i} data={action} />
+            <div className="filter show-log-times">
+              <button
+                className={`filter-button ${showTimes && 'active'}`}
+                onClick={() => setShowTimes(!showTimes)}
+              >
+                <span className="icon icon-schedule" />
+              </button>
+            </div>
+            <div className="filter clear-list">
+              <button className="filter-button" onClick={() => clearActions()}>
+                <span className="icon icon-delete_sweep" />
+              </button>
+            </div>
+          </div>
+        </div>
+        {actions.length ? (
+          <div className="wrap-panels">
+            <div className="panel-list">
+              {actions.map((action, i) => (
+                <Action
+                  key={i}
+                  data={action}
+                  onSelect={() => this.setState({ selected: i })}
+                  selected={selected === i}
+                />
               ))}
             </div>
-          )}
-        </div>
+            {selected ? (
+              <div className="panel-details">
+                <ActionDetails
+                  data={selected}
+                  onClose={() => this.setState({ selected: null })}
+                />
+              </div>
+            ) : (
+              <div className="panel-timelines">
+                {actions.map((action, i) => (
+                  <ActionTimeline key={i} data={action} />
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="wrap-panels">
+            <p className="empty-message">No actions found.</p>
+          </div>
+        )}
       </div>
     );
   }

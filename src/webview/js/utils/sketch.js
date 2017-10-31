@@ -1,15 +1,14 @@
 import store from 'webview/js/store';
-import { receiveAction } from 'actions/bridge';
 
 /**
  * Bridge function that allows the plugin to send data to the
  * web view by calling this function.
  * It is globally defined on the window object in index.js!
  */
-export const bridge = (jsonString) => {
+export const bridge = jsonString => {
   try {
     let jsonData = jsonString ? JSON.parse(jsonString) : {};
-    store.dispatch(receiveAction(jsonData.name, jsonData.payload));
+    console.log(jsonData);
   } catch (error) {
     console.error(error);
   }
@@ -21,9 +20,11 @@ export const bridge = (jsonString) => {
  * in the plugin to create the web view
  */
 export const check = () => {
-  return window.webkit &&
+  return (
+    window.webkit &&
     window.webkit.messageHandlers &&
-    window.webkit.messageHandlers.Sketch;
+    window.webkit.messageHandlers.Sketch
+  );
 };
 
 /**
@@ -35,7 +36,9 @@ export const sendAction = (name, payload = {}) => {
     if (!check()) {
       reject(new Error('Could not connect to Sketch!'));
     }
-    window.webkit.messageHandlers.Sketch.postMessage(JSON.stringify({name, payload}));
+    window.webkit.messageHandlers.Sketch.postMessage(
+      JSON.stringify({ name, payload })
+    );
     resolve();
   });
 };

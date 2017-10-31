@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import LogList from 'components/console/log-list';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -12,9 +12,6 @@ const mapStateToProps = state => {
 
 @connect(mapStateToProps)
 export default class Elements extends Component {
-  static propTypes = {};
-  static defaultProps = {};
-
   render () {
     const { tree } = this.props;
     return (
@@ -22,7 +19,7 @@ export default class Elements extends Component {
         {tree.length > 0 ? (
           <ElementTree tree={tree} />
         ) : (
-          <p className="empty">
+          <p className="empty-message">
             No Elements found! We'll keep looking, just to be sure ;)
           </p>
         )}

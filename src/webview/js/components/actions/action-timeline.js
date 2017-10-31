@@ -5,18 +5,20 @@ export default class ActionTimeline extends Component {
     const { data, index } = this.props;
     return (
       <div className="panel-timeline">
-        {data.duration !== undefined ? (
+        {data.finish !== undefined ? (
           [
             <span
               className="panel-timeline-bar"
               style={{
-                width: `${data.duration ? data.duration / 500 : 0.2}rem`,
+                width: `${data.finish.ts
+                  ? (data.finish.ts - data.ts) / 500
+                  : 0.2}rem`,
                 marginLeft: `${index * 0.4}rem`
               }}
             />,
-            data.duration ? (
+            data.finish.ts ? (
               <span className="panel-timeline-value">
-                {data.duration / 1000}s
+                {(data.finish.ts - data.ts) / 1000}s
               </span>
             ) : (
               <span className="panel-timeline-pending">pending</span>

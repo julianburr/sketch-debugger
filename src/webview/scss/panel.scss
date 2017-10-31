@@ -26,6 +26,13 @@
       transition: background .2s, opacity .2s, color .2s;
       font-size: 1.2rem;
 
+      .timestamp {
+        opacity: .3;
+        padding: 0 1.2rem 0 0;
+        font-family: $fonts-mono;
+        font-size: 1.1rem;
+      }
+
       &:hover {
         opacity: .8;
       }
