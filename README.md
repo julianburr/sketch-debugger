@@ -1,6 +1,10 @@
-# Sketch Debugger
+![Logo](./logo.svg)
 
-**Please note this repo is still in alpha stage, things may or may not be working and APIs will most likely change in the future**
+
+
+# Sketch Plugin Debugger
+
+**Please note this repo is still in the experimental stage, things may or may not be working and APIs will most likely change in the future**
 
 This tool was born out of the frustration of existing debugging tools for Sketch plugin development. It is a concept for a debugger console in form of an easily instalable Sketch plugin, as well as a bundle of util functions that can be pulled into any project using npm.
 
@@ -101,6 +105,7 @@ With a similar util library it would be possible to log network requests and res
  - [x] ~~Create build structure that also creates compiled and optimized util folder to be used as npm entry point~~ *TODO: simplify (build) scripts*
  - [x] ~~Publish npm package~~
  - [ ] Create simple website with howtos and documentation of util functions
+ - [ ] Debugger lib build
 
 ## Util Functions
  - [ ] .count method
@@ -108,11 +113,13 @@ With a similar util library it would be possible to log network requests and res
  - [ ] .group* methods
 
 ## Plugin
+ - [ ] Hook Sketch up to deliver data in specified format
  - [ ] Add stack trace now that I can get it with the preprocessor enabled + integrate [source map](https://github.com/mozilla/source-map) handling to show the original trace if plugin.js has a source map defined!
- - [ ] Finish console
- - [ ] Add element tree panel
+ - [x] ~~Finish console layout / design~~
+ - [x] ~~Add element tree panel~~
  - [x] ~~Create HTTP request utils that also send data to debugger~~ see [`sketch-fetch`](https://github.com/julianburr/sketch-fetch)
- - [ ] Add network panel
+ - [x] ~~Add network panel~~
+ - [x] ~~Add actions panel~~
  - [ ] Add action listener (if possible without crashes :/) and add action panel
  - [ ] Integrate automated `MS*` documentation tool build on the [`class-dumps`](https://github.com/abynim/Sketch-Headers) if possible
  - [ ] Think about a way to read the system logs as well and turn them into a nicer/more readable format in the plugins console
