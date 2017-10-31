@@ -12,8 +12,9 @@ body {
   font-family: $fonts-default;
   float: left;
   font-size: 1.3rem;
-  font-weight: $font-weight-light;
+  font-weight: $font-weight-regular;
   color: $colors-primary;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {

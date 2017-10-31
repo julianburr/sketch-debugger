@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import LogList from 'components/console/log-list';
 import _ from 'lodash';
-import { setSearch, setSearchOpen, setTypes, clearLogs, setShowLogTimes } from 'actions/console';
+import {
+  setSearch,
+  setSearchOpen,
+  setTypes,
+  clearLogs,
+  setShowLogTimes
+} from 'actions/console';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -40,22 +46,29 @@ export default class Console extends Component {
 
   render () {
     return (
-      <div className='console tab-content-inner'>
-        <div className='filters'>
-          <div className='filters-inner'>
-            <div className='filter search'>
-              <button className={`filter-button ${this.props.searchOpen && 'active'}`} onClick={() => {
-                this._refs.searchInput.focus();
-                this.props.setSearchOpen(!this.props.searchOpen);
-              }}>
-                <span className='icon icon-search' />
-                <span className={`indicator ${this.props.search && 'active'}`} />
+      <div className="console tab-content-inner">
+        <div className="filters">
+          <div className="filters-inner">
+            <div className="filter search">
+              <button
+                className={`filter-button ${this.props.searchOpen && 'active'}`}
+                onClick={() => {
+                  this._refs.searchInput.focus();
+                  this.props.setSearchOpen(!this.props.searchOpen);
+                }}
+              >
+                <span className="icon icon-search" />
+                <span
+                  className={`indicator ${this.props.search && 'active'}`}
+                />
               </button>
-              <div className={`search-panel ${this.props.searchOpen && 'active'}`}>
+              <div
+                className={`search-panel ${this.props.searchOpen && 'active'}`}
+              >
                 <input
-                  ref={c => this._refs.searchInput = c}
-                  type='text'
-                  placeholder='Type search...'
+                  ref={c => (this._refs.searchInput = c)}
+                  type="text"
+                  placeholder="Type search..."
                   onChange={e => this.props.setSearch(e.target.value)}
                   value={this.props.search}
                 />
@@ -65,16 +78,21 @@ export default class Console extends Component {
                     this.props.setSearch('');
                     this._refs.searchInput.focus();
                   }}
-                >&times;</button>
+                >
+                  &times;
+                </button>
               </div>
             </div>
-            <div className='filter log-types'>
-              {['default', 'warning', 'error'].map(type => {
+            <div className="filter log-types">
+              {[ 'default', 'warning', 'error' ].map(type => {
                 return (
                   <button
                     key={type}
                     onClick={() => {
-                      this.props.setTypes({...this.props.types, [type]: !this.props.types[type]});
+                      this.props.setTypes({
+                        ...this.props.types,
+                        [type]: !this.props.types[type]
+                      });
                     }}
                     className={`
                       filter-button 
@@ -82,21 +100,29 @@ export default class Console extends Component {
                       type-${type} 
                       ${this.props.types[type] && 'active'}
                     `}
-                  >k</button>
+                  >
+                    k
+                  </button>
                 );
               })}
             </div>
-            <div className='filter show-log-times'>
+            <div className="filter show-log-times">
               <button
-                className={`filter-button ${this.props.showLogTimes && 'active'}`}
-                onClick={() => this.props.setShowLogTimes(!this.props.showLogTimes)}
-              ><span className='icon icon-schedule' /></button>
+                className={`filter-button ${this.props.showLogTimes &&
+                  'active'}`}
+                onClick={() =>
+                  this.props.setShowLogTimes(!this.props.showLogTimes)}
+              >
+                <span className="icon icon-schedule" />
+              </button>
             </div>
-            <div className='filter clear-console'>
+            <div className="filter clear-list">
               <button
-                className='filter-button'
+                className="filter-button"
                 onClick={() => this.props.clearLogs()}
-              ><span className='icon icon-delete_sweep' /></button>
+              >
+                <span className="icon icon-delete_sweep" />
+              </button>
             </div>
           </div>
         </div>

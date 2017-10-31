@@ -1,4 +1,11 @@
-import { ADD_REQUEST, SET_RESPONSE } from 'actions/elements';
+import {
+  ADD_REQUEST,
+  SET_RESPONSE,
+  CLEAR_REQUESTS,
+  SET_SEARCH_OPEN,
+  SET_SEARCH,
+  SET_SHOW_TIMES
+} from 'actions/network';
 
 export let defaultState = {
   requests: [
@@ -51,7 +58,10 @@ export let defaultState = {
       },
       response: {}
     }
-  ]
+  ],
+  search: '',
+  searchOpen: false,
+  showTimes: false
 };
 
 export default (state, action) => {
@@ -97,6 +107,30 @@ export default (state, action) => {
         requests
       };
       break;
+
+    case CLEAR_REQUESTS:
+      return {
+        ...state,
+        requests: []
+      };
+
+    case SET_SEARCH_OPEN:
+      return {
+        ...state,
+        searchOpen: !!action.payload.open
+      };
+
+    case SET_SEARCH:
+      return {
+        ...state,
+        search: action.payload.search
+      };
+
+    case SET_SHOW_TIMES:
+      return {
+        ...state,
+        showTimes: !!action.payload.show
+      };
 
     default:
       return state;

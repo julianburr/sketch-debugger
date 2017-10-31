@@ -4,6 +4,7 @@
   background: $colors-background;
   flex-direction: row;
   padding: .6rem;
+  overflow: auto;
 
   .panel-list {
     display: flex;
@@ -76,11 +77,20 @@
     background: $colors-white;
     padding: 1.4rem;
     position: relative;
+    overflow: auto;
 
     .close-button {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: .6rem;
+      right: .6rem;
+      opacity: .5;
+      font-size: 2.5rem;
+      border: 0 none;
+      background: none transparent;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }

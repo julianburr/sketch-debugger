@@ -6,7 +6,7 @@
   "author": "Julian Burr",
   "commands": [
     {
-      "shortcut": "command alt i",
+      "shortcut": "command control i",
       "script": "plugin.js",
       "handler": "openWindow",
       "name": "Open",

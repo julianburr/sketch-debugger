@@ -20,7 +20,16 @@ export function open (identifier, path = 'index.html', options = {}) {
     NSBackingStoreBuffered,
     false
   );
-  window.backgroundColor = NSColor.whiteColor();
+
+  const components = [ 0.8, 0.78, 0.72, 1.0 ];
+  const backgroundColor = NSColor.colorWithSRGBRed_green_blue_alpha(
+    0.8,
+    0.78,
+    0.72,
+    1.0
+  );
+
+  window.backgroundColor = backgroundColor;
   window.setMinSize({ width: 400, height: 300 });
   window.titlebarAppearsTransparent = true;
   window.titleVisibility = NSWindowTitleHidden;
