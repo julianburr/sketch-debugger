@@ -42,7 +42,8 @@ export default class Network extends Component {
       showSearch,
       showTimes,
       setShowTimes,
-      setShowSearch
+      setShowSearch,
+      clearRequests
     } = this.props;
     const { selected } = this.state;
 
@@ -116,10 +117,10 @@ export default class Network extends Component {
                 />
               ))}
             </div>
-            {selected ? (
+            {selected !== null ? (
               <div className="panel-details">
                 <NetworkRequestDetails
-                  data={selected}
+                  data={requests[selected]}
                   onClose={() => this.setState({ selected: null })}
                 />
               </div>

@@ -1,5 +1,6 @@
 import { pluginFolderPath, document, context } from 'utils/core';
 import ObjCClass from 'cocoascript-class';
+import { sendWildcardsEnabled } from 'utils/debug';
 
 // These are just used to identify the window(s)
 // Change them to whatever you need e.g. if you need to support multiple
@@ -19,7 +20,7 @@ export const BridgeMessageHandler = new ObjCClass({
   ) {
     try {
       const bridgeMessage = JSON.parse(String(message.body()));
-      receiveAction(bridgeMessage.name, bridgeMessage.data);
+      receiveAction(bridgeMessage.name, bridgeMessage.payload);
     } catch (e) {
       log('Could not parse bridge message');
       log(e.message);
@@ -62,7 +63,21 @@ export function sendAction (webView, name, payload = {}) {
 }
 
 export function receiveAction (name, payload = {}) {
-  document.showMessage('I received a message! 😊🎉🎉');
+  log('action received');
+  log(name);
+  log(payload);
+  switch (name) {
+    case 'requestInitialData':
+      sendWildcardsEnabled();
+      break;
+    case 'setWildcardsEnabled':
+      AppController.sharedInstance()
+        .pluginManager()
+        .setWilcardsEnabled(!!payload.enabled);
+      sendWildcardsEnabled();
+      break;
+  }
+  document.showMessage(`I received the message '${name}'! 😊🎉🎉`);
 }
 
 export { windowIdentifier, panelIdentifier };

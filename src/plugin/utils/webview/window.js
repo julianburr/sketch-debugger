@@ -9,11 +9,12 @@ export function open (identifier, path = 'index.html', options = {}) {
   }
 
   // Sensible defaults for options
-  const { width = 600, height = 400, title = 'Sketch Debugger' } = options;
+  const { width = 650, height = 450, title = 'Sketch Debugger' } = options;
 
   const frame = NSMakeRect(0, 0, width, height);
   const masks =
     NSTitledWindowMask | NSWindowStyleMaskClosable | NSResizableWindowMask;
+
   window = NSPanel.alloc().initWithContentRect_styleMask_backing_defer(
     frame,
     masks,
@@ -30,7 +31,7 @@ export function open (identifier, path = 'index.html', options = {}) {
   );
 
   window.backgroundColor = backgroundColor;
-  window.setMinSize({ width: 400, height: 300 });
+  window.setMinSize({ width: 400, height: 400 });
   window.titlebarAppearsTransparent = true;
   window.titleVisibility = NSWindowTitleHidden;
 
@@ -39,39 +40,23 @@ export function open (identifier, path = 'index.html', options = {}) {
   threadDictionary[identifier] = window;
 
   const webView = createWebView(path, frame);
+  window.contentView().addSubview(webView);
 
   window.title = title;
   window.center();
-
-  window.movableByWindowBackground = true;
-  window.isMovableByWindowBackground = true;
-
-  let box = NSBox.alloc().initWithFrame(NSMakeRect(0, 300, 100, 100));
-  box.boxType = NSBoxCustom;
-  box.borderType = NSLineBorder;
-  box.fillColor = NSColor.yellowColor(); //NSColor.colorWithCalibratedRed_green_blue_alpha(255.0, 0.0, 0.0, 1.0)
-  box.mouseDownCanMoveWindow = true;
-  box.opaque = true;
-  box.setAcceptsTouchEvents(true);
-  // box.setIgnoresMouseEvents(false);
-
   window.makeKeyAndOrderFront(null);
-
-  window.contentView().addSubview(webView);
-  // window.contentView().addSubview(box);
-
-  log('box');
-  log(box.registeredDraggedTypes());
-  log('window');
-  log(window.isMovableByWindowBackground());
 }
 
 export function findWebView (identifier) {
   let threadDictionary = NSThread.mainThread().threadDictionary();
   const window = threadDictionary[identifier];
-  return window.contentView().subviews()[0];
+  return window ? window.contentView().subviews()[0] : null;
 }
 
 export function sendAction (identifier, name, payload = {}) {
-  return sendActionToWebView(findWebView(identifier), name, payload);
+  const webView = findWebView(identifier);
+  if (!webView) {
+    return;
+  }
+  return sendActionToWebView(webView, name, payload);
 }

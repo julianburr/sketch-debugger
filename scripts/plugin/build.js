@@ -36,7 +36,15 @@ function build (callback) {
     manifest.commands.forEach(function (command) {
       var file = paths.build + '/' + command.script;
       var compiled = fs.readFileSync(file);
-      compiled += "\n\nvar " + command.handler + " = handlers." + command.handler + ";";
+      if (command.handler) {
+        compiled +=
+          '\n\nvar ' + command.handler + ' = handlers.' + command.handler + ';';
+      } else if (command.handlers && command.handlers.actions) {
+        Object.keys(command.handlers.actions).map(action => {
+          const handler = command.handlers.actions[action];
+          compiled += '\n\nvar ' + handler + ' = handlers.' + handler + ';';
+        });
+      }
       fs.writeFileSync(file, compiled);
     });
 
@@ -53,7 +61,10 @@ function build (callback) {
         console.log('  ✓ Copy frameworks');
         fs.emptyDirSync(paths.frameworksBuild);
         frameworks.forEach(function (item) {
-          fs.copySync(paths.frameworks + '/' + item, paths.frameworksBuild + '/' + item);
+          fs.copySync(
+            paths.frameworks + '/' + item,
+            paths.frameworksBuild + '/' + item
+          );
         });
       }
     }

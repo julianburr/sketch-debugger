@@ -5,12 +5,14 @@ import { actionCreators } from 'data/actions';
 import Action from 'components/actions/action';
 import ActionTimeline from 'components/actions/action-timeline';
 import ActionDetails from 'components/actions/action-details';
+import { sendAction } from 'utils/sketch';
 
 const mapStateToProps = state => ({
   actions: state.actions.actions,
   search: state.actions.search,
   showSearch: state.actions.showSearch,
-  showTimes: state.actions.showTimes
+  showTimes: state.actions.showTimes,
+  wildcardsEnabled: state.actions.wildcardsEnabled
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -39,6 +41,7 @@ export default class Actions extends Component {
       setShowTimes,
       setShowSearch,
       setSearch,
+      wildcardsEnabled,
       clearActions
     } = this.props;
     const { selected } = this.state;
@@ -77,6 +80,17 @@ export default class Actions extends Component {
                 </button>
               </div>
             </div>
+            <div className="filter enable-wildcards">
+              <button
+                className={`filter-button ${wildcardsEnabled && 'active'}`}
+                onClick={() =>
+                  sendAction('setWildcardsEnabled', {
+                    enabled: !wildcardsEnabled
+                  }).catch(console.error)}
+              >
+                <span className="icon icon-asterisk" />
+              </button>
+            </div>
             <div className="filter show-log-times">
               <button
                 className={`filter-button ${showTimes && 'active'}`}
@@ -104,10 +118,10 @@ export default class Actions extends Component {
                 />
               ))}
             </div>
-            {selected ? (
+            {selected !== null ? (
               <div className="panel-details">
                 <ActionDetails
-                  data={selected}
+                  data={actions[selected]}
                   onClose={() => this.setState({ selected: null })}
                 />
               </div>

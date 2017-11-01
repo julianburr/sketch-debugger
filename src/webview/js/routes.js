@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 import { history } from './store';
+import { sendAction } from 'utils/sketch';
 
 import App from 'components/screens/app';
 import Console from 'components/screens/console';
@@ -21,6 +22,10 @@ class Redirect extends Component {
 }
 
 export default class Routes extends Component {
+  componentDidMount () {
+    sendAction('requestInitialData').catch(console.error);
+  }
+
   render () {
     return (
       <Router history={history}>

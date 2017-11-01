@@ -1,6 +1,6 @@
 import { openWindow, sendWindowAction } from 'utils/webview';
 import { toArray } from 'utils/formatter';
-import { log, prepareValue, getStack } from './debug';
+import { prepareValue, getStack } from './debug';
 
 export const DEBUGGER_IDENTIFIER = 'window/sketch-debugger';
 
@@ -20,6 +20,36 @@ export function sendLog (values, type) {
 
 export function sendElementTree () {
   sendWindowAction(DEBUGGER_IDENTIFIER, 'setElementTree', getElementTree());
+}
+
+export function sendWildcardsEnabled () {
+  const enabled = AppController.sharedInstance()
+    .pluginManager()
+    .wilcardsEnabled();
+  sendWindowAction(DEBUGGER_IDENTIFIER, 'setWildcardsEnabled', {
+    enabled: !!enabled
+  });
+}
+
+export function sendAction (context) {
+  let actionContext;
+  try {
+    // TODO: transform action context into valid JSON object
+    actionContext = {};
+  } catch (e) {
+    log('Something went wrong');
+    actionContext = {};
+  }
+  log('action detected');
+  log(context.action);
+  log(actionContext);
+  sendWindowAction(DEBUGGER_IDENTIFIER, 'addAction', {
+    action: {
+      name: String(context.action),
+      ts: parseInt(NSDate.date().timeIntervalSince1970()) * 1000,
+      context: actionContext
+    }
+  });
 }
 
 export function getElementTree () {

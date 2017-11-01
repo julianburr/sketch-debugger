@@ -20,6 +20,14 @@
     },
     {
       "script": "plugin.js",
+      "handlers" : {
+        "actions": {
+          "*": "onAction"
+        }
+      }
+    },
+    {
+      "script": "plugin.js",
       "handler": "handleBridgeMessage",
       "name": "Handle Bridge Message",
       "identifier": "handleBridgeMessage"
